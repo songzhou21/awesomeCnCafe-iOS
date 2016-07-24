@@ -27,6 +27,7 @@
 		E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB991D449695003B2736 /* Settings.swift */; };
 		E4BFEB9C1D44A077003B2736 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4BFEB9B1D44A077003B2736 /* settings.plist */; };
 		E4BFEB9E1D44A45C003B2736 /* SettingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */; };
+		E4BFEBA41D44F05E003B2736 /* SwiftHEXColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */; };
 		E4D3F0971D393273003FF502 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C65571D38BCF500F2564C /* Cafe.swift */; };
 		E4D3F0981D3932E0003FF502 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C65551D38BB3A00F2564C /* Location.swift */; };
 		E4D3F09A1D39DC84003FF502 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D3F0991D39DC84003FF502 /* LocationManager.swift */; };
@@ -78,6 +79,7 @@
 		E4BFEB991D449695003B2736 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E4BFEB9B1D44A077003B2736 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingKeys.swift; sourceTree = "<group>"; };
+		E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
 		E4D3F0991D39DC84003FF502 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E4D3F09B1D3A2759003FF502 /* MapContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapContainerView.swift; sourceTree = "<group>"; };
 		E4D3F09D1D3A4930003FF502 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				E44C654A1D38B86700F2564C /* AlamofireObjectMapper.framework in Frameworks */,
 				E44C654B1D38B86700F2564C /* ObjectMapper.framework in Frameworks */,
 				E44C654C1D38B86700F2564C /* Alamofire.framework in Frameworks */,
+				E4BFEBA41D44F05E003B2736 /* SwiftHEXColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +123,7 @@
 		E44C65501D38B89300F2564C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */,
 				E44C65471D38B86700F2564C /* AlamofireObjectMapper.framework */,
 				E44C65481D38B86700F2564C /* ObjectMapper.framework */,
 				E44C65491D38B86700F2564C /* Alamofire.framework */,
@@ -347,6 +351,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftHEXColors.framework",
 			);
 			outputPaths = (
 			);
