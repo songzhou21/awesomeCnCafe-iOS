@@ -28,6 +28,13 @@ class NetworkManaer {
                     
                     self.supportCities[city] = cityObject
                 }
+                
+                // check if current city is supported
+                if let currentCity = LocationManager.currentCity {
+                    if self.supportCities[currentCity.pinyin] != nil {
+                            NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [current_city: currentCity]))
+                    }
+                }
             }
         }
     }
@@ -35,7 +42,8 @@ class NetworkManaer {
     func getNearbyCafe(inCity city: City, completion: (cafeArray: [Cafe]?, error: NSError?) -> Void) {
         if let cityPinyin = city.pinyin, name = city.name {
             let url = "\(base_url)\(cityPinyin).geojson"
-            debugPrint("search nearyby cafe in \(name)\n requesting \(url)")
+            debugPrint("search nearyby cafe in \(name)")
+            debugPrint("requesting \(url)")
             
             Alamofire.request(.GET, url).responseObject { (response: Response<CafeResponse, NSError>) in
                     let cafeResponse = response.result.value

@@ -21,6 +21,18 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var manager: [CLLocationManager: LocationManagerCallback] = [:]
     static let sharedInstance = LocationManager()
     
+    static let lastCityCoordinate : CLLocationCoordinate2D? = {
+        if let coordinateArray = Settings.sharedInstance[lastLocation] as? [Double] where coordinateArray.count == 2 {
+            let coordinate = CLLocationCoordinate2DMake(coordinateArray.first!, coordinateArray.last!)
+            if CLLocationCoordinate2DIsValid(coordinate) {
+                return coordinate
+            }
+            
+        }
+        
+        return nil
+    }()
+    
     static let geoCoder = CLGeocoder()
     static var currentCity: City? {
         didSet {
@@ -54,17 +66,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-//    func getCurrentCity(withLocation location: CLLocation) {
-//        self.getCurrentCity(location) { (city, error) in
-//            if let currentCity = LocationManager.currentCity {
-//                if currentCity != city {
-//                    LocationManager.currentCity = city
-//                }
-//            } else {
-//                LocationManager.currentCity = city
-//            }
-//        }
-//    }
     func getCurrentCity(withLocation location: CLLocation) {
         self.getCurrentCity(location, success: { (result) in
             if let city = result as? City {
@@ -149,22 +150,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             }
         }, fail: { (error) in
             fail(error: error)
-        }, retry: 10)
+        }, retry: 3)
     }
     
     private func reverseGeocodeLocation(location: CLLocation, success: Success, fail: Fail, retry: UInt) {
         LocationManager.geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
             if let error = error {
                 if retry != 0 {
-                    debugPrint("retry:\(retry), error: \(error.localizedDescription)")
+                    debugPrint("get reverse geo code retry:\(retry), error: \(error.localizedDescription)")
                     self.reverseGeocodeLocation(location, success: success, fail: fail, retry: retry - 1)
                 } else {
-                    debugPrint("fail, error: \(error.localizedDescription)")
+                    debugPrint("get reverse geo code fail, error: \(error.localizedDescription)")
                     fail(error: error)
                 }
             } else {
                 if let mark = placeMarks?.first {
-                    debugPrint("success:\(mark.name)")
+                    debugPrint("get reverse geo code success:\(mark.name!)")
                    success(result: mark)
                 }
             }

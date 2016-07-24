@@ -18,6 +18,10 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         
+        if let lastCoordiante = LocationManager.lastCityCoordinate {
+            view.jumpToCoordinateWithDefaultZoomLebel(lastCoordiante, animated: false)
+        }
+        
         return view
     }()
     
@@ -103,7 +107,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
             self.title = city.name
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(currentCityDidSupportNotification, object: LocationManager.sharedInstance, queue: NSOperationQueue.mainQueue()) { (notification) in
+        NSNotificationCenter.defaultCenter().addObserverForName(currentCityDidSupportNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) in
             let city = notification.userInfo![current_city] as! City
             debugPrint("\(city.name) support")
             NetworkManaer.sharedInstance.getNearbyCafe(inCity: city, completion: { (cafeArray, error) in
