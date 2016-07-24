@@ -77,8 +77,6 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         
         let userTrackingBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
         toolbar.setItems([userTrackingBarButtonItem], animated: false)
-        
-        
     }
     
     // MARK: - View Controller LifeCycle
@@ -110,18 +108,20 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         NSNotificationCenter.defaultCenter().addObserverForName(currentCityDidSupportNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) in
             let city = notification.userInfo![current_city] as! City
             debugPrint("\(city.name) support")
-            NetworkManaer.sharedInstance.getNearbyCafe(inCity: city, completion: { (cafeArray, error) in
-                if error == nil {
-                    if let cafeArray = cafeArray {
-                        for cafe in cafeArray {
-                            let ann = MKPointAnnotation()
-                            ann.coordinate = (cafe.location?.coordinate)!
-                            
-                            self.mapView.addAnnotation(ann)
+            if NetworkManaer.sharedInstance.requestedCities[city.pinyin] == nil {
+                NetworkManaer.sharedInstance.getNearbyCafe(inCity: city, completion: { (cafeArray, error) in
+                    if error == nil {
+                        if let cafeArray = cafeArray {
+                            for cafe in cafeArray {
+                                let ann = MKPointAnnotation()
+                                ann.coordinate = (cafe.location?.coordinate)!
+                                
+                                self.mapView.addAnnotation(ann)
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName(currentCityNotSupportNotification, object: LocationManager.sharedInstance, queue: NSOperationQueue.mainQueue()) { (notification) in

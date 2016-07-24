@@ -16,6 +16,7 @@ class NetworkManaer {
     static let sharedInstance = NetworkManaer()
     
     var supportCities = [String: City]()
+    var requestedCities = [String: City]()
     
     func requestSupportCities(){
         Alamofire.request(.GET, repo_read_me).responseString { (
@@ -48,7 +49,7 @@ class NetworkManaer {
             Alamofire.request(.GET, url).responseObject { (response: Response<CafeResponse, NSError>) in
                     let cafeResponse = response.result.value
                 completion(cafeArray: cafeResponse?.cafeArray, error: response.result.error)
-                
+                self.requestedCities[city.pinyin] = city
             }
         }
     }
