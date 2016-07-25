@@ -28,6 +28,8 @@
 		E4BFEB9C1D44A077003B2736 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4BFEB9B1D44A077003B2736 /* settings.plist */; };
 		E4BFEB9E1D44A45C003B2736 /* SettingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */; };
 		E4BFEBA41D44F05E003B2736 /* SwiftHEXColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */; };
+		E4BFEBA01D44E2C4003B2736 /* CafeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB9F1D44E2C4003B2736 /* CafeAnnotation.swift */; };
+		E4BFEBA21D44E67D003B2736 /* CafeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEBA11D44E67D003B2736 /* CafeAnnotationView.swift */; };
 		E4D3F0971D393273003FF502 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C65571D38BCF500F2564C /* Cafe.swift */; };
 		E4D3F0981D3932E0003FF502 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C65551D38BB3A00F2564C /* Location.swift */; };
 		E4D3F09A1D39DC84003FF502 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D3F0991D39DC84003FF502 /* LocationManager.swift */; };
@@ -80,6 +82,8 @@
 		E4BFEB9B1D44A077003B2736 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingKeys.swift; sourceTree = "<group>"; };
 		E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
+		E4BFEB9F1D44E2C4003B2736 /* CafeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeAnnotation.swift; sourceTree = "<group>"; };
+		E4BFEBA11D44E67D003B2736 /* CafeAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeAnnotationView.swift; sourceTree = "<group>"; };
 		E4D3F0991D39DC84003FF502 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E4D3F09B1D3A2759003FF502 /* MapContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapContainerView.swift; sourceTree = "<group>"; };
 		E4D3F09D1D3A4930003FF502 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				E4BFEB931D4473D9003B2736 /* Task.swift */,
 				E4BFEB991D449695003B2736 /* Settings.swift */,
 				E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */,
+				E4BFEB9F1D44E2C4003B2736 /* CafeAnnotation.swift */,
+				E4BFEBA11D44E67D003B2736 /* CafeAnnotationView.swift */,
 				E48FE4151D3E6BFC00EDA119 /* Model */,
 				E44C65541D38BAA800F2564C /* Other */,
 			);
@@ -390,11 +396,13 @@
 				E4BFEB941D4473D9003B2736 /* Task.swift in Sources */,
 				E4D3F0A21D3A6222003FF502 /* City.swift in Sources */,
 				E4542B231D3872D8009B6EAB /* MainMapViewController.swift in Sources */,
+				E4BFEBA21D44E67D003B2736 /* CafeAnnotationView.swift in Sources */,
 				E4D3F09A1D39DC84003FF502 /* LocationManager.swift in Sources */,
 				E4D3F09C1D3A2759003FF502 /* MapContainerView.swift in Sources */,
 				E44C65561D38BB3A00F2564C /* Location.swift in Sources */,
 				E4542AF31D387245009B6EAB /* AppDelegate.swift in Sources */,
 				E4BFEB9E1D44A45C003B2736 /* SettingKeys.swift in Sources */,
+				E4BFEBA01D44E2C4003B2736 /* CafeAnnotation.swift in Sources */,
 				E4D3F0A01D3A4D0E003FF502 /* LocationTransform.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

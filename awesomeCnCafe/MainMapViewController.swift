@@ -12,6 +12,7 @@ import Alamofire
 import AlamofireObjectMapper
 
 let toolbar_height: CGFloat = 44
+let cafe_annotation_identifier = "Cafe Annotation"
 
 class MainMapViewController: UIViewController, MKMapViewDelegate {
     // MARK: - Properties
@@ -81,6 +82,8 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - View Controller LifeCycle
     override func viewDidLoad() {
+        mapView.showsUserLocation = true
+        mapView.delegate = self;
         
         // change mapView center coordinate to user location on first launch
         locationManager.updatingUserLocation(CLLocationManager()) {[unowned self] (manager: CLLocationManager, location: CLLocation) in
@@ -90,11 +93,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
             LocationManager.sharedInstance.getCurrentCity(withLocation: location)
         }
         
-        mapView.showsUserLocation = true
-        mapView.delegate = self;
-        
         NetworkManaer.sharedInstance.requestSupportCities()
-        
       
         
     }
@@ -113,9 +112,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
                     if error == nil {
                         if let cafeArray = cafeArray {
                             for cafe in cafeArray {
-                                let ann = MKPointAnnotation()
-                                ann.coordinate = (cafe.location?.coordinate)!
-                                
+                                let ann = CafeAnnotation(cafe: cafe)
                                 self.mapView.addAnnotation(ann)
                             }
                         }
@@ -141,6 +138,24 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         let location = CLLocation(coordinate: mapView.centerCoordinate)
         LocationManager.sharedInstance.getCurrentCity(withLocation: location)
         
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        var view: MKAnnotationView?
+        if annotation.isKindOfClass(CafeAnnotation) {
+            var cafeAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(cafe_annotation_identifier)
+            if cafeAnnotationView == nil {
+                cafeAnnotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
+                cafeAnnotationView?.canShowCallout = true
+            }
+            
+            let cafeAnnotation = annotation as? CafeAnnotation
+            cafeAnnotationView?.tintColor = cafeAnnotation?.tintColor
+            
+            view = cafeAnnotationView
+        }
+        
+        return view
     }
     
 }
