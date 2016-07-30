@@ -12,7 +12,8 @@ import Alamofire
 import AlamofireObjectMapper
 
 let toolbar_height: CGFloat = 44
-let cafe_annotation_identifier = "Cafe Annotation"
+
+let cafe_annotation_identifier = "Cafe annotation identifier"
 
 class MainMapViewController: UIViewController, MKMapViewDelegate {
     // MARK:  Properties
@@ -38,6 +39,10 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         return LocationManager.sharedManager
     }()
     
+    
+    lazy var annotationImages = {
+        return [UIColor: UIImage]()
+    }()
     
     // MARK: - Initialization
     init() {
@@ -121,17 +126,31 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var view: MKAnnotationView?
-        if annotation.isKindOfClass(CafeAnnotation) {
-            var cafeAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(cafe_annotation_identifier)
-            if cafeAnnotationView == nil {
-                cafeAnnotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
-                cafeAnnotationView?.canShowCallout = true
+        
+        switch annotation.dynamicType {
+        case is CafeAnnotation.Type:
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(cafe_annotation_identifier)
+            if annotationView == nil {
+                annotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
+                annotationView?.canShowCallout = true
             }
             
-            let cafeAnnotation = annotation as? CafeAnnotation
-            cafeAnnotationView?.tintColor = cafeAnnotation?.tintColor
+            
+           let cafeAnnotationView = annotationView as! CafeAnnotationView
+            if let cafeAnnotation = annotation as? CafeAnnotation {
+                if let image = annotationImages[cafeAnnotation.tintColor] {
+                    cafeAnnotationView.image = image
+                } else {
+                    let image = cafeAnnotationView.annotationImage(cafeAnnotation.tintColor)
+                    cafeAnnotationView.image = image
+                    
+                    annotationImages[cafeAnnotation.tintColor] = image
+                }
+            }
             
             view = cafeAnnotationView
+        default: break
+            
         }
         
         return view
@@ -164,6 +183,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         let city = notification.userInfo![current_city] as! City
         debugPrint("\(city.name) not support")
     }
+    
     
 }
 

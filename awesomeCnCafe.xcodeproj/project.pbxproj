@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E425A8731D4D01E000869C61 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E425A8721D4D01E000869C61 /* Annotation.swift */; };
 		E44C654A1D38B86700F2564C /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44C65471D38B86700F2564C /* AlamofireObjectMapper.framework */; };
 		E44C654B1D38B86700F2564C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44C65481D38B86700F2564C /* ObjectMapper.framework */; };
 		E44C654C1D38B86700F2564C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44C65491D38B86700F2564C /* Alamofire.framework */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E425A8721D4D01E000869C61 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		E44C65471D38B86700F2564C /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		E44C65481D38B86700F2564C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		E44C65491D38B86700F2564C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -124,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E425A8741D4D043900869C61 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				E425A8721D4D01E000869C61 /* Annotation.swift */,
+				E4BFEB9F1D44E2C4003B2736 /* CafeAnnotation.swift */,
+			);
+			name = Annotation;
+			sourceTree = "<group>";
+		};
 		E44C65501D38B89300F2564C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,8 +192,8 @@
 				E4BFEB931D4473D9003B2736 /* Task.swift */,
 				E4BFEB991D449695003B2736 /* Settings.swift */,
 				E4BFEB9D1D44A45C003B2736 /* SettingKeys.swift */,
-				E4BFEB9F1D44E2C4003B2736 /* CafeAnnotation.swift */,
 				E4BFEBA11D44E67D003B2736 /* CafeAnnotationView.swift */,
+				E425A8741D4D043900869C61 /* Annotation */,
 				E48FE4151D3E6BFC00EDA119 /* Model */,
 				E44C65541D38BAA800F2564C /* Other */,
 			);
@@ -389,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4D3F09E1D3A4930003FF502 /* MapView.swift in Sources */,
+				E425A8731D4D01E000869C61 /* Annotation.swift in Sources */,
 				E44C65581D38BCF500F2564C /* Cafe.swift in Sources */,
 				E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */,
 				E4D3F0A41D3A62D3003FF502 /* NetworkManager.swift in Sources */,

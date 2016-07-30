@@ -16,19 +16,6 @@ class CafeAnnotationView: MKAnnotationView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let backgroundImage = UIImage.init(named: "cafe_background")?.imageWithRenderingMode(.AlwaysTemplate)
-        let outlineImage = UIImage(named: "cafe_outline")
-        
-        let size = (backgroundImage?.size)!
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        
-        backgroundImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        outlineImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-       self.image = newImage
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,19 +25,19 @@ class CafeAnnotationView: MKAnnotationView {
 }
 
 extension CafeAnnotationView {
-    override func tintColorDidChange() {
+    func annotationImage(tintColor: UIColor) -> UIImage {
         let backgroundImage = UIImage.init(named: "cafe_background")?.imageWithRenderingMode(.AlwaysTemplate)
         let outlineImage = UIImage(named: "cafe_outline")
         
         let size = (backgroundImage?.size)!
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        self.tintColor.set()
+        tintColor.set()
         
         backgroundImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
         outlineImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-       self.image = newImage
+        return newImage
     }
 }

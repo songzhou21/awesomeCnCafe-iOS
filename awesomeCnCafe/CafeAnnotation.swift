@@ -6,23 +6,23 @@
 //  Copyright © 2016年 Song Zhou. All rights reserved.
 //
 
-import Foundation
-import MapKit
+import UIKit
 import SwiftHEXColors
 
-class CafeAnnotation: MKPointAnnotation {
-    var tintColor: UIColor?
+let defaultColor = UIColor.grayColor()
+
+class CafeAnnotation: PointAnnotation {
+    var tintColor = defaultColor
     
     init(cafe: Cafe) {
-        super.init()
-        
-        self.title = cafe.name
-        if let coordinate = cafe.location?.coordinate {
-            self.coordinate = coordinate
-        }
+        super.init(location: cafe)
         
         if let markerColor = cafe.markerColor {
-            self.tintColor = UIColor(hexString: markerColor)
+            if let color = UIColor(hexString: markerColor) {
+                self.tintColor = color
+            }
         }
+        
     }
+    
 }
