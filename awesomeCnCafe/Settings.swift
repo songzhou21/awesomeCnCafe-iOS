@@ -69,7 +69,7 @@ extension Settings {
 
 extension Settings {
     func setLastLocation() {
-        if let location = LocationManager.currentCity?.location?.coordinate {
+        if let location = LocationManager.sharedManager.currentCity?.location?.coordinate {
             self[lastLocation] = [location.latitude, location.longitude]
         }
     }

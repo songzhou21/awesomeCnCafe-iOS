@@ -15,13 +15,19 @@ let currentCityNotSupportNotification = "currentCityNotSupportNotification"
 
 let current_city = "current city"
 
+typealias LocationManagerCallback = (CLLocationManager, CLLocation) -> ()
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    typealias LocationManagerCallback = (CLLocationManager, CLLocation) -> ()
     
-    var manager: [CLLocationManager: LocationManagerCallback] = [:]
-    static let sharedInstance = LocationManager()
+    static let sharedManager = LocationManager()
     
-    static let lastCityCoordinate : CLLocationCoordinate2D? = {
+    private override init() { }
+    
+    /// callback approach rather than delegate
+    var managers: [CLLocationManager: LocationManagerCallback] = [:]
+    
+    /// the last city visited when user exit app
+    let lastCityCoordinate : CLLocationCoordinate2D? = {
         if let coordinateArray = Settings.sharedInstance[lastLocation] as? [Double] where coordinateArray.count == 2 {
             let coordinate = CLLocationCoordinate2DMake(coordinateArray.first!, coordinateArray.last!)
             if CLLocationCoordinate2DIsValid(coordinate) {
@@ -33,48 +39,55 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return nil
     }()
     
-    static let geoCoder = CLGeocoder()
-    static var currentCity: City? {
+    var supportCities = [String: City]()
+    var requestedCities = [String: City]()
+    
+    let geoCoder = CLGeocoder()
+    
+    var currentCity: City? {
         didSet {
             if let city = currentCity {
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidChangeNotification, object: sharedInstance, userInfo: [current_city: city]))
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidChangeNotification, object: self, userInfo: [current_city: city]))
                 
-                if  NetworkManaer.sharedInstance.supportCities[city.pinyin] != nil {
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: sharedInstance, userInfo: [current_city: city]))
+                if  self.supportCities[city.pinyin] != nil {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [current_city: city]))
                 } else {
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityNotSupportNotification, object: sharedInstance, userInfo: [current_city: city]))
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityNotSupportNotification, object: self, userInfo: [current_city: city]))
                 }
             }
             
         }
     }
     
+    // MARK: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let callback = self.managers[manager] {
+            if let location = locations.first {
+                callback(manager, location)
+            }
+        }
+    }
+ 
+    // MARK: Public
     func updatingUserLocation(manager: CLLocationManager, completion: LocationManagerCallback) {
-        if self.manager.count == 0 {
+        if self.managers.count == 0 {
             manager.requestWhenInUseAuthorization()
         }
         
-        self.manager[manager] = completion
-        manager.delegate = self
+        self.managers[manager] = completion
+        manager.delegate = LocationManager.sharedManager
         manager.startUpdatingLocation()
     }
     
-    /// MARK: - CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let callback = self.manager[manager] {
-            callback(manager, locations.first!)
-        }
-    }
-    
     func getCurrentCity(withLocation location: CLLocation) {
-        self.getCurrentCity(location, success: { (result) in
+        self.getCurrentCity(location, success: { [unowned self] (result) in
             if let city = result as? City {
-                if let currentCity = LocationManager.currentCity {
+                if let currentCity = self.currentCity {
                     if currentCity != city {
-                        LocationManager.currentCity = city
+                        self.currentCity = city
                     }
                 } else {
-                    LocationManager.currentCity = city
+                    self.currentCity = city
                 }
             }
             }, fail: { (error) in
@@ -83,44 +96,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         )
         
     }
-
-    private func getCurrentCity(location: CLLocation, completion:(city: City?, error: NSError?) -> Void) {
-        LocationManager.geoCoder.reverseGeocodeLocation(location) { (placeMarks: [CLPlacemark]?, error: NSError?) in
-            if let error = error {
-                debugPrint("get reverse geo with error: \(error.localizedDescription)")
-                completion(city: nil, error: error)
-            } else {
-                if let mark = placeMarks?.first {
-                    if let name = mark.name {
-                        debugPrint("get reverse geo success: \(name)")
-                    } else {
-                        debugPrint("get reverse geo success with getting name failed")
-                    }
-                    
-                    if let locality = mark.locality {
-                        let cityMutableString = NSMutableString(string: locality)
-                        CFStringTransform(cityMutableString, nil, kCFStringTransformToLatin, false)
-                        CFStringTransform(cityMutableString, nil, kCFStringTransformStripDiacritics, false)
-                        
-                        var cityName = cityMutableString as String
-                        cityName = cityName.stringByReplacingOccurrencesOfString(" ", withString: "")
-                        if cityName.hasSuffix("shi") {
-                            cityName.removeRange(cityName.rangeOfString("shi")!)
-                        }
-                        
-                        let city = City(pinyin: cityName)
-                        city.location = mark.location
-                        city.name = locality
-                        completion(city: city, error: error)
-                    }
-                    
-                } else {
-                    completion(city: nil, error: nil)
-                }
-            }
-        }
-    }
     
+
+    // MARK: Private
     private func getCurrentCity(location: CLLocation, success: Success, fail: Fail) {
        self.reverseGeocodeLocation(location, success: { (result) in
             if let mark = result as? CLPlacemark {
@@ -154,7 +132,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     private func reverseGeocodeLocation(location: CLLocation, success: Success, fail: Fail, retry: UInt) {
-        LocationManager.geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+        self.geoCoder.reverseGeocodeLocation(location) {[unowned self] (placeMarks, error) in
             if let error = error {
                 if retry != 0 {
                     debugPrint("get reverse geo code retry:\(retry), error: \(error.localizedDescription)")

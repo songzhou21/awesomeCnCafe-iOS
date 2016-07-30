@@ -15,25 +15,29 @@ let toolbar_height: CGFloat = 44
 let cafe_annotation_identifier = "Cafe Annotation"
 
 class MainMapViewController: UIViewController, MKMapViewDelegate {
-    // MARK: - Properties
+    // MARK:  Properties
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         
-        if let lastCoordiante = LocationManager.lastCityCoordinate {
+        if let lastCoordiante = LocationManager.sharedManager.lastCityCoordinate {
             view.jumpToCoordinateWithDefaultZoomLebel(lastCoordiante, animated: false)
         }
         
         return view
     }()
     
-    lazy var locationManager: LocationManager = {
-        let manager = LocationManager()
-        return manager
-    }()
-    
     var containerView: MapContainerView!
     var toolbar: UIToolbar!
     var userTrackingBarButtonItem: MKUserTrackingBarButtonItem!
+    
+    lazy var networkManager: NetworkManager = {
+        return NetworkManager.sharedInstance
+    }()
+    
+    lazy var locationManager: LocationManager = {
+        return LocationManager.sharedManager
+    }()
+    
     
     // MARK: - Initialization
     init() {
@@ -80,7 +84,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         toolbar.setItems([userTrackingBarButtonItem], animated: false)
     }
     
-    // MARK: - View Controller LifeCycle
+    // MARK:  View Controller LifeCycle
     override func viewDidLoad() {
         mapView.showsUserLocation = true
         mapView.delegate = self;
@@ -90,53 +94,28 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
             self.mapView.jumpToCoordinateWithDefaultZoomLebel(location.coordinate.toMars(), animated: false)
             manager.stopUpdatingLocation()
             
-            LocationManager.sharedInstance.getCurrentCity(withLocation: location)
+            self.locationManager.getCurrentCity(withLocation: location)
         }
         
-        NetworkManaer.sharedInstance.requestSupportCities()
-      
+        networkManager.requestSupportCities()
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserverForName(currentCityDidChangeNotification, object:LocationManager.sharedInstance, queue: NSOperationQueue.mainQueue()) { (notification) in
-            let city = notification.userInfo![current_city] as! City
-            self.title = city.name
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityDidChange(_:)), name: currentCityDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityDidSupport(_:)), name: currentCityDidSupportNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityNotSupport(_:)), name: currentCityNotSupportNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserverForName(currentCityDidSupportNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) in
-            let city = notification.userInfo![current_city] as! City
-            debugPrint("\(city.name) support")
-            if NetworkManaer.sharedInstance.requestedCities[city.pinyin] == nil {
-                NetworkManaer.sharedInstance.getNearbyCafe(inCity: city, completion: { (cafeArray, error) in
-                    if error == nil {
-                        if let cafeArray = cafeArray {
-                            for cafe in cafeArray {
-                                let ann = CafeAnnotation(cafe: cafe)
-                                self.mapView.addAnnotation(ann)
-                            }
-                        }
-                    }
-                })
-            }
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(currentCityNotSupportNotification, object: LocationManager.sharedInstance, queue: NSOperationQueue.mainQueue()) { (notification) in
-            let city = notification.userInfo![current_city] as! City
-            debugPrint("\(city.name) not support")
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: currentCityDidChangeNotification, object: LocationManager.sharedInstance)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: currentCityDidSupportNotification, object: LocationManager.sharedInstance)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: currentCityNotSupportNotification, object: LocationManager.sharedInstance)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         let location = CLLocation(coordinate: mapView.centerCoordinate)
-        LocationManager.sharedInstance.getCurrentCity(withLocation: location)
+        locationManager.getCurrentCity(withLocation: location)
         
     }
     
@@ -156,6 +135,34 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         return view
+    }
+    
+    // MARK: Private
+    @objc private func currentCityDidChange(notification: NSNotification) {
+        let city = notification.userInfo![current_city] as! City
+        self.title = city.name
+    }
+    
+    @objc private func currentCityDidSupport(notification: NSNotification) {
+        let city = notification.userInfo![current_city] as! City
+        debugPrint("\(city.name) support")
+        if locationManager.requestedCities[city.pinyin] == nil {
+            networkManager.getNearbyCafe(inCity: city, completion: { [unowned self] (cafeArray, error) in
+                if error == nil {
+                    if let cafeArray = cafeArray {
+                        for cafe in cafeArray {
+                            let ann = CafeAnnotation(cafe: cafe)
+                            self.mapView.addAnnotation(ann)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    @objc private func currentCityNotSupport(notification: NSNotification) {
+        let city = notification.userInfo![current_city] as! City
+        debugPrint("\(city.name) not support")
     }
     
 }
