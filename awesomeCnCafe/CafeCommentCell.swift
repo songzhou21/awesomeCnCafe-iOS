@@ -33,7 +33,6 @@ class CafeCommentCell: UITableViewCell {
         textView = UITextView()
         textView.scrollEnabled = false
         textView.editable = false
-        textView.font = UIFont.systemFontOfSize(16)
         self.contentView.addSubview(textView)
         
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,10 +49,34 @@ class CafeCommentCell: UITableViewCell {
 
 extension CafeCommentCell {
     func setupDataSource(comment: Comment){
-        self.textView.text = comment.content
+        if let user = comment.author?.userName, let content = comment.content {
+            let string = "\(user): \(content)"
+            let attributedString = NSMutableAttributedString(string: string)
+            let ns_sring = string as NSString
+            attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.grayColor()], range: ns_sring.rangeOfString(user))
+            attributedString.addAttributes([NSFontAttributeName: UIFont.systemFontOfSize(16)], range: NSMakeRange(0, ns_sring.length))
+            
+            self.textView.attributedText = attributedString
+        }
     }
     
     override func prepareForReuse() {
         self.textView.text = nil
     }
+    
+    func textViewHeight() -> CGFloat {
+        self.layoutIfNeeded()
+        let maxSize = CGSize(width: self.textView.bounds.width, height: CGFloat.max)
+        return self.textView.sizeThatFits(maxSize).height
+    }
+}
+
+class CafeCommentCellData {
+    var height: CGFloat?
+    let data: Comment
+    
+    init(comment:Comment) {
+        data = comment
+    }
+    
 }

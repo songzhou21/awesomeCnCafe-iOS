@@ -11,7 +11,7 @@ import UIKit
 let cafe_properties_cell_identifier = "cafe_properties_cell_identifier"
 let cafe_comment_cell_identifier = "cafe_comment_cell_identifier"
 
-let commentCellHeight: CGFloat = 80
+let commentCellHeight: CGFloat = 40
 let cafeDetailCellHeight: CGFloat = 40
 
 class CafeAnnotationDetailTableViewController: UITableViewController {
@@ -72,14 +72,18 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
            cell.textLabel?.text = data as? String
             
             resultCell = cell
-        case is Comment.Type:
+        case is CafeCommentCellData.Type:
             var commentCell = tableView.dequeueReusableCellWithIdentifier(cafe_comment_cell_identifier) as? CafeCommentCell
             if commentCell == nil {
                 commentCell = CafeCommentCell(reuseIdentifier: cafe_comment_cell_identifier)
             }
             
-            if let comment = data as? Comment {
-                commentCell?.setupDataSource(comment)
+            if let comment = data as? CafeCommentCellData {
+                commentCell?.setupDataSource(comment.data)
+                comment.height = commentCell?.textViewHeight()
+                
+                tableView.beginUpdates()
+                tableView.endUpdates()
             }
             
             resultCell = commentCell!
@@ -95,8 +99,13 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
         let data = section[indexPath.row]
         
         switch data.dynamicType {
-        case is Comment.Type:
-            return commentCellHeight
+        case is CafeCommentCellData.Type:
+            let comment = data as! CafeCommentCellData
+            if let height = comment.height {
+                return height
+            } else {
+                return commentCellHeight
+            }
         default:
             break
         }
@@ -111,7 +120,10 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
         }
         
         if let comments = cafe.comment {
-            dataSource.append((NSLocalizedString("comment", comment: ""), comments))
+            dataSource.append(
+                (NSLocalizedString("comment", comment: ""),
+                    comments.map{ return CafeCommentCellData(comment: $0) })
+            )
         }
         
         if let price = cafe.price {
