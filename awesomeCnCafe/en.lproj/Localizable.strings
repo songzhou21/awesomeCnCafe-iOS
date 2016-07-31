@@ -6,8 +6,8 @@
   Copyright © 2016 Song Zhou. All rights reserved.
 */
 
-"speed" = "Speed"";
-"comment" = "Comment;
-"price" = "Price"";
+"speed" = "Speed";
+"comment" = "Comment";
+"price" = "Price";
 "other" = "Other";
 "current_location" = "Current Location";
