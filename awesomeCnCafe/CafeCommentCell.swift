@@ -8,8 +8,6 @@
 
 import UIKit
 
-let cafeCommentCellDefaultCellHeight: CGFloat = 40.0
-
 class CafeCommentCell: UITableViewCell {
 
     var textView: UITextView!
@@ -68,6 +66,7 @@ extension CafeCommentCell {
     
     func textViewHeight() -> CGFloat {
         self.layoutIfNeeded()
+        
         let maxSize = CGSize(width: self.textView.bounds.width, height: CGFloat.max)
         return self.textView.sizeThatFits(maxSize).height
     }

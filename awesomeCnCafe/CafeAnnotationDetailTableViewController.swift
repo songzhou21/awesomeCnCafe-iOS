@@ -11,7 +11,7 @@ import UIKit
 let cafe_properties_cell_identifier = "cafe_properties_cell_identifier"
 let cafe_comment_cell_identifier = "cafe_comment_cell_identifier"
 
-let commentCellHeight: CGFloat = 40
+let cafeCommentCellDefaultCellHeight: CGFloat = 54.5 // two lines
 let cafeDetailCellHeight: CGFloat = 40
 
 class CafeAnnotationDetailTableViewController: UITableViewController {
@@ -105,7 +105,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
             if let height = comment.height {
                 return height
             } else {
-                return commentCellHeight
+                return cafeCommentCellDefaultCellHeight
             }
         default:
             break
