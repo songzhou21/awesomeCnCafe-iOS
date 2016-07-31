@@ -141,10 +141,18 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
                 annotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
                 annotationView?.canShowCallout = true
                 
+//                let detailButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+//                let image = UIImage(named: "map_disclosure")
+//                detailButton.setImage(image, forState: .Normal)
+                
                 let detailButton = UIButton(type: .DetailDisclosure)
                 detailButton.addTarget(self, action: #selector(self.detailButtonTapped(_:)), forControlEvents: .TouchUpInside)
                 
-                let navigationButton = UIButton(type: .DetailDisclosure)
+                
+                let navigationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+                let navigaitonImage = UIImage(named: "action-directions")?.imageWithRenderingMode(.AlwaysTemplate)
+                navigationButton.setImage(navigaitonImage, forState: .Normal)
+                navigationButton.tintColor = UIColor(hex: Color.calloutBlue)
                 navigationButton.addTarget(self, action: #selector(self.navigationButtonTapped(_:)), forControlEvents: .TouchUpInside)
                 
                 annotationView?.rightCalloutAccessoryView = detailButton

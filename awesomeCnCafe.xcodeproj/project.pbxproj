@@ -55,6 +55,8 @@
 		E4B115591D4E467100417988 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B115561D4E467100417988 /* Localizable.strings */; };
 		E4B1155F1D4E467E00417988 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B1155B1D4E467E00417988 /* InfoPlist.strings */; };
 		E4B115601D4E467E00417988 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B1155D1D4E467E00417988 /* Localizable.strings */; };
+		E4B115621D4E566B00417988 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B115611D4E566B00417988 /* ColorConstant.swift */; };
+		E4B115631D4E56EC00417988 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B115611D4E566B00417988 /* ColorConstant.swift */; };
 		E4BCB0551D3A75B200711ACF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCB0541D3A75B200711ACF /* Utility.swift */; };
 		E4BFEB941D4473D9003B2736 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB931D4473D9003B2736 /* Task.swift */; };
 		E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB991D449695003B2736 /* Settings.swift */; };
@@ -121,6 +123,7 @@
 		E4B115571D4E467100417988 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		E4B1155C1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		E4B1155E1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		E4B115611D4E566B00417988 /* ColorConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstant.swift; sourceTree = "<group>"; };
 		E4BCB0541D3A75B200711ACF /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E4BFEB931D4473D9003B2736 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E4BFEB991D449695003B2736 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -252,6 +255,7 @@
 				E425A8791D4DA61100869C61 /* CafeAnnotationDetailTableViewController.swift */,
 				E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */,
 				E4B1154E1D4E215600417988 /* LayoutConstant.swift */,
+				E4B115611D4E566B00417988 /* ColorConstant.swift */,
 				E425A8971D4DD08B00869C61 /* Extension */,
 				E425A8741D4D043900869C61 /* Annotation */,
 				E48FE4151D3E6BFC00EDA119 /* Model */,
@@ -510,6 +514,7 @@
 				E4D3F0A01D3A4D0E003FF502 /* LocationTransform.swift in Sources */,
 				E4B1154F1D4E215600417988 /* LayoutConstant.swift in Sources */,
 				E425A8781D4DA5D500869C61 /* CafeAnnotationDetailViewController.swift in Sources */,
+				E4B115621D4E566B00417988 /* ColorConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +546,7 @@
 				E425A8831D4DCEC900869C61 /* LocationTransform.swift in Sources */,
 				E425A88B1D4DCEDD00869C61 /* CafeAnnotationDetailViewController.swift in Sources */,
 				E425A8901D4DCEE800869C61 /* City.swift in Sources */,
+				E4B115631D4E56EC00417988 /* ColorConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
