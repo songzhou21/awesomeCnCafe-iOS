@@ -1,0 +1,13 @@
+/*
+  Localizable.strings
+  CafeHunter
+
+  Created by Song Zhou on 7/31/16
+  Copyright © 2016 Song Zhou. All rights reserved.
+*/
+
+"speed" = "Speed"";
+"comment" = "Comment;
+"price" = "Price"";
+"other" = "Other";
+"current_location" = "Current Location";

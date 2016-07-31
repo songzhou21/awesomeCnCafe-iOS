@@ -51,6 +51,10 @@
 		E4B1154F1D4E215600417988 /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154E1D4E215600417988 /* LayoutConstant.swift */; };
 		E4B115501D4E215600417988 /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154E1D4E215600417988 /* LayoutConstant.swift */; };
 		E4B115521D4E36F900417988 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B115511D4E36F900417988 /* MapKit.framework */; };
+		E4B115581D4E467100417988 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B115541D4E467100417988 /* InfoPlist.strings */; };
+		E4B115591D4E467100417988 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B115561D4E467100417988 /* Localizable.strings */; };
+		E4B1155F1D4E467E00417988 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B1155B1D4E467E00417988 /* InfoPlist.strings */; };
+		E4B115601D4E467E00417988 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B1155D1D4E467E00417988 /* Localizable.strings */; };
 		E4BCB0551D3A75B200711ACF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCB0541D3A75B200711ACF /* Utility.swift */; };
 		E4BFEB941D4473D9003B2736 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB931D4473D9003B2736 /* Task.swift */; };
 		E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB991D449695003B2736 /* Settings.swift */; };
@@ -113,6 +117,10 @@
 		E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeCommentCell.swift; sourceTree = "<group>"; };
 		E4B1154E1D4E215600417988 /* LayoutConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
 		E4B115511D4E36F900417988 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E4B115551D4E467100417988 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
+		E4B115571D4E467100417988 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
+		E4B1155C1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		E4B1155E1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		E4BCB0541D3A75B200711ACF /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E4BFEB931D4473D9003B2736 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E4BFEB991D449695003B2736 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -199,6 +207,8 @@
 				E4542AFB1D387245009B6EAB /* LaunchScreen.storyboard */,
 				E4542AFE1D387245009B6EAB /* Info.plist */,
 				E4BFEB9B1D44A077003B2736 /* settings.plist */,
+				E4B1155A1D4E467E00417988 /* en.lproj */,
+				E4B115531D4E467100417988 /* zh-Hans.lproj */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -277,6 +287,24 @@
 				E44C65571D38BCF500F2564C /* Cafe.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E4B115531D4E467100417988 /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				E4B115541D4E467100417988 /* InfoPlist.strings */,
+				E4B115561D4E467100417988 /* Localizable.strings */,
+			);
+			path = "zh-Hans.lproj";
+			sourceTree = "<group>";
+		};
+		E4B1155A1D4E467E00417988 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				E4B1155B1D4E467E00417988 /* InfoPlist.strings */,
+				E4B1155D1D4E467E00417988 /* Localizable.strings */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +401,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = E4542AE61D387244009B6EAB;
 			productRefGroup = E4542AF01D387245009B6EAB /* Products */;
@@ -391,7 +420,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B115591D4E467100417988 /* Localizable.strings in Resources */,
+				E4B1155F1D4E467E00417988 /* InfoPlist.strings in Resources */,
 				E4542AFD1D387245009B6EAB /* LaunchScreen.storyboard in Resources */,
+				E4B115601D4E467E00417988 /* Localizable.strings in Resources */,
+				E4B115581D4E467100417988 /* InfoPlist.strings in Resources */,
 				E4BFEB9C1D44A077003B2736 /* settings.plist in Resources */,
 				E4542AFA1D387245009B6EAB /* Assets.xcassets in Resources */,
 			);
@@ -541,6 +574,38 @@
 				E4542AFC1D387245009B6EAB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E4B115541D4E467100417988 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4B115551D4E467100417988 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E4B115561D4E467100417988 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4B115571D4E467100417988 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E4B1155B1D4E467E00417988 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4B1155C1D4E467E00417988 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E4B1155D1D4E467E00417988 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4B1155E1D4E467E00417988 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
