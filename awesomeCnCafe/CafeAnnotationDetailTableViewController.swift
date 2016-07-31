@@ -8,16 +8,32 @@
 
 import UIKit
 
-class CafeAnnotationDetailTableViewController: UITableViewController {
+let cafe_properties_cell_identifier = "cafe_properties_cell_identifier"
+let cafe_comment_cell_identifier = "cafe_comment_cell_identifier"
 
+let commentCellHeight: CGFloat = 80
+let cafeDetailCellHeight: CGFloat = 40
+
+class CafeAnnotationDetailTableViewController: UITableViewController {
+    private let cafe: Cafe
+    private var dataSource = [(String, [AnyObject])]()
+
+    init(cafe: Cafe) {
+       self.cafe = cafe
+        
+       super.init(style: .Grouped)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cafe_properties_cell_identifier)
+        
+        setUpDataSouce()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,13 +45,85 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return dataSource.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        let section = dataSource[section]
+        return section.1.count
     }
 
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataSource[section].0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let section = dataSource[indexPath.section].1
+        var resultCell: UITableViewCell!
+        
+        let data = section[indexPath.row]
+        switch data.dynamicType {
+        case is String.Type:
+            fallthrough
+        case is NSString.Type:
+            let cell = tableView.dequeueReusableCellWithIdentifier(cafe_properties_cell_identifier)!
+        
+           cell.textLabel?.text = data as? String
+            
+            resultCell = cell
+        case is Comment.Type:
+            var commentCell = tableView.dequeueReusableCellWithIdentifier(cafe_comment_cell_identifier) as? CafeCommentCell
+            if commentCell == nil {
+                commentCell = CafeCommentCell(reuseIdentifier: cafe_comment_cell_identifier)
+            }
+            
+            if let comment = data as? Comment {
+                commentCell?.setupDataSource(comment)
+            }
+            
+            resultCell = commentCell!
+        default: break
+        }
+        
+        return resultCell
+    }
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let section = dataSource[indexPath.section].1
+        
+        let data = section[indexPath.row]
+        
+        switch data.dynamicType {
+        case is Comment.Type:
+            return commentCellHeight
+        default:
+            break
+        }
+        
+        return cafeDetailCellHeight
+    }
+    
+    // MARK: Private
+    func setUpDataSouce() {
+        if let speeds = cafe.networkSpeed {
+            dataSource.append((NSLocalizedString("speed", comment: ""), speeds))
+        }
+        
+        if let comments = cafe.comment {
+            dataSource.append((NSLocalizedString("comment", comment: ""), comments))
+        }
+        
+        if let price = cafe.price {
+            dataSource.append((NSLocalizedString("price", comment: ""), [price]))
+        }
+        
+        if let properties = cafe.properties {
+            let values = properties.keys.map{ key in
+                return "\(key):\(properties[key]!)"
+            }
+            
+            dataSource.append((NSLocalizedString("other", comment: ""), Array(values)))
+        }
+    }
 }

@@ -46,6 +46,10 @@
 		E4542B081D387245009B6EAB /* awesomeCnCafeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4542B071D387245009B6EAB /* awesomeCnCafeTests.swift */; };
 		E4542B131D387245009B6EAB /* awesomeCnCafeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4542B121D387245009B6EAB /* awesomeCnCafeUITests.swift */; };
 		E4542B231D3872D8009B6EAB /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4542B221D3872D8009B6EAB /* MainMapViewController.swift */; };
+		E4B1154C1D4DFA1A00417988 /* CafeCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */; };
+		E4B1154D1D4DFA1E00417988 /* CafeCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */; };
+		E4B1154F1D4E215600417988 /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154E1D4E215600417988 /* LayoutConstant.swift */; };
+		E4B115501D4E215600417988 /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1154E1D4E215600417988 /* LayoutConstant.swift */; };
 		E4BCB0551D3A75B200711ACF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCB0541D3A75B200711ACF /* Utility.swift */; };
 		E4BFEB941D4473D9003B2736 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB931D4473D9003B2736 /* Task.swift */; };
 		E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB991D449695003B2736 /* Settings.swift */; };
@@ -105,6 +109,8 @@
 		E4542B121D387245009B6EAB /* awesomeCnCafeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = awesomeCnCafeUITests.swift; sourceTree = "<group>"; };
 		E4542B141D387245009B6EAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4542B221D3872D8009B6EAB /* MainMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
+		E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeCommentCell.swift; sourceTree = "<group>"; };
+		E4B1154E1D4E215600417988 /* LayoutConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
 		E4BCB0541D3A75B200711ACF /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E4BFEB931D4473D9003B2736 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E4BFEB991D449695003B2736 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				E4BFEBA11D44E67D003B2736 /* CafeAnnotationView.swift */,
 				E425A8771D4DA5D500869C61 /* CafeAnnotationDetailViewController.swift */,
 				E425A8791D4DA61100869C61 /* CafeAnnotationDetailTableViewController.swift */,
+				E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */,
+				E4B1154E1D4E215600417988 /* LayoutConstant.swift */,
 				E425A8971D4DD08B00869C61 /* Extension */,
 				E425A8741D4D043900869C61 /* Annotation */,
 				E48FE4151D3E6BFC00EDA119 /* Model */,
@@ -439,6 +447,7 @@
 			files = (
 				E425A87E1D4DCAF300869C61 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				E425A8731D4D01E000869C61 /* Annotation.swift in Sources */,
+				E4B1154C1D4DFA1A00417988 /* CafeCommentCell.swift in Sources */,
 				E44C65581D38BCF500F2564C /* Cafe.swift in Sources */,
 				E425A87A1D4DA61100869C61 /* CafeAnnotationDetailTableViewController.swift in Sources */,
 				E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */,
@@ -457,6 +466,7 @@
 				E4BFEBA01D44E2C4003B2736 /* CafeAnnotation.swift in Sources */,
 				E425A8951D4DD05000869C61 /* MKMapView+Extension.swift in Sources */,
 				E4D3F0A01D3A4D0E003FF502 /* LocationTransform.swift in Sources */,
+				E4B1154F1D4E215600417988 /* LayoutConstant.swift in Sources */,
 				E425A8781D4DA5D500869C61 /* CafeAnnotationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,11 +476,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4542B081D387245009B6EAB /* awesomeCnCafeTests.swift in Sources */,
+				E4B1154D1D4DFA1E00417988 /* CafeCommentCell.swift in Sources */,
 				E425A8881D4DCED600869C61 /* Settings.swift in Sources */,
 				E425A8851D4DCECE00869C61 /* LocationManager.swift in Sources */,
 				E425A88C1D4DCEDF00869C61 /* CafeAnnotationDetailTableViewController.swift in Sources */,
 				E425A8841D4DCECB00869C61 /* Utility.swift in Sources */,
 				E425A88D1D4DCEE100869C61 /* CLLocationCoordinate2D+Extension.swift in Sources */,
+				E4B115501D4E215600417988 /* LayoutConstant.swift in Sources */,
 				E425A8871D4DCED400869C61 /* Task.swift in Sources */,
 				E425A8861D4DCED000869C61 /* NetworkManager.swift in Sources */,
 				E425A88E1D4DCEE300869C61 /* Annotation.swift in Sources */,

@@ -177,7 +177,10 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
                 switch annotation.dynamicType {
                 case is CafeAnnotation.Type:
                     if let cafeAnnotation = annotation as? CafeAnnotation {
-                       print(cafeDict[cafeAnnotation.coordinate.sz_hashValue()]?.name)
+                        if let cafe = cafeDict[cafeAnnotation.coordinate.sz_hashValue()] {
+                            self.navigationController?.pushViewController(CafeAnnotationDetailViewController(cafe: cafe), animated: true)
+                        }
+                        
                     }
                     break
                 default:
