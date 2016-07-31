@@ -13,7 +13,7 @@ let currentCityDidChangeNotification = "currentCityDidChangedNotification"
 let currentCityDidSupportNotification = "currentCityDidSupportNotification"
 let currentCityNotSupportNotification = "currentCityNotSupportNotification"
 
-let current_city = "current city"
+let currentCityKey = "current city"
 
 typealias LocationManagerCallback = (CLLocationManager, CLLocation) -> ()
 
@@ -47,12 +47,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var currentCity: City? {
         didSet {
             if let city = currentCity {
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidChangeNotification, object: self, userInfo: [current_city: city]))
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidChangeNotification, object: self, userInfo: [currentCityKey: city]))
                 
                 if  self.supportCities[city.pinyin] != nil {
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [current_city: city]))
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [currentCityKey: city]))
                 } else {
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityNotSupportNotification, object: self, userInfo: [current_city: city]))
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityNotSupportNotification, object: self, userInfo: [currentCityKey: city]))
                 }
             }
             

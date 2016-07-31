@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import AlamofireObjectMapper
+import Contacts
 
 let toolbar_height: CGFloat = 44
 
@@ -46,7 +47,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         return [UIColor: UIImage]()
     }()
     
-    var currentSelectedAnnotationView: MKAnnotationView?
+    var currentSelectedAnnotationView: MKAnnotationView!
     
     var cafeDict = [CoordinateHashKey: Cafe]()
     
@@ -142,7 +143,13 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
                 
                 let detailButton = UIButton(type: .DetailDisclosure)
                 detailButton.addTarget(self, action: #selector(self.detailButtonTapped(_:)), forControlEvents: .TouchUpInside)
+                
+                let navigationButton = UIButton(type: .DetailDisclosure)
+                navigationButton.addTarget(self, action: #selector(self.navigationButtonTapped(_:)), forControlEvents: .TouchUpInside)
+                
                 annotationView?.rightCalloutAccessoryView = detailButton
+                annotationView?.leftCalloutAccessoryView = navigationButton
+                
             }
             
             
@@ -190,14 +197,36 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    func navigationButtonTapped(sender: UIButton) {
+        let userLocationItem = MKMapItem(placemark:MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: [
+            CNPostalAddressStreetKey: NSLocalizedString("current_location", comment: "")
+            ]))
+        
+        var destinationItem: MKMapItem?
+        if let anntation = currentSelectedAnnotationView.annotation as? CafeAnnotation {
+            let cafe = self.cafeDict[anntation.coordinate.sz_hashValue()]!
+            destinationItem = MKMapItem(placemark:MKPlacemark(coordinate: (currentSelectedAnnotationView?.annotation?.coordinate)!, addressDictionary: [
+            CNPostalAddressStreetKey: cafe.name!
+            ]))
+        
+        }
+        
+        if let destinationItem = destinationItem {
+            MKMapItem.openMapsWithItems([userLocationItem, destinationItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
+        } else {
+            MKMapItem.openMapsWithItems([userLocationItem], launchOptions: nil)
+        }
+        
+    }
+    
     // MARK: Private
     @objc private func currentCityDidChange(notification: NSNotification) {
-        let city = notification.userInfo![current_city] as! City
+        let city = notification.userInfo![currentCityKey] as! City
         self.title = city.name
     }
     
     @objc private func currentCityDidSupport(notification: NSNotification) {
-        let city = notification.userInfo![current_city] as! City
+        let city = notification.userInfo![currentCityKey] as! City
         debugPrint("\(city.name) support")
         if locationManager.requestedCities[city.pinyin] == nil {
             networkManager.getNearbyCafe(inCity: city, completion: { [unowned self] (cafeArray, error) in
@@ -216,7 +245,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @objc private func currentCityNotSupport(notification: NSNotification) {
-        let city = notification.userInfo![current_city] as! City
+        let city = notification.userInfo![currentCityKey] as! City
         debugPrint("\(city.name) not support")
     }
     

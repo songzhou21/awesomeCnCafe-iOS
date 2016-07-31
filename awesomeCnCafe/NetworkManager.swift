@@ -33,7 +33,7 @@ class NetworkManager {
                 // check if current city is supported
                 if let currentCity = self.locationManager.currentCity {
                     if self.locationManager.supportCities[currentCity.pinyin] != nil {
-                            NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [current_city: currentCity]))
+                            NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [currentCityKey: currentCity]))
                     }
                 }
             }
