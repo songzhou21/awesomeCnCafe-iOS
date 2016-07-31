@@ -68,6 +68,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
             fallthrough
         case is NSString.Type:
             let cell = tableView.dequeueReusableCellWithIdentifier(cafe_properties_cell_identifier)!
+            cell.selectionStyle = .None
         
            cell.textLabel?.text = data as? String
             

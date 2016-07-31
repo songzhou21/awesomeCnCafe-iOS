@@ -17,6 +17,7 @@ class CafeCommentCell: UITableViewCell {
     init(reuseIdentifier: String?) {
         super.init(style: .Default, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .None
         self.initTextView()
     }
     
@@ -33,6 +34,7 @@ class CafeCommentCell: UITableViewCell {
         textView = UITextView()
         textView.scrollEnabled = false
         textView.editable = false
+        textView.selectable = false
         self.contentView.addSubview(textView)
         
         textView.translatesAutoresizingMaskIntoConstraints = false
