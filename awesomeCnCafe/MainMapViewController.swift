@@ -15,6 +15,8 @@ let toolbar_height: CGFloat = 44
 
 let cafe_annotation_identifier = "Cafe annotation identifier"
 
+typealias CoordinateHashKey = Int
+
 class MainMapViewController: UIViewController, MKMapViewDelegate {
     // MARK:  Properties
     lazy var mapView: MKMapView = {
@@ -43,6 +45,10 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     lazy var annotationImages = {
         return [UIColor: UIImage]()
     }()
+    
+    var currentSelectedAnnotationView: MKAnnotationView?
+    
+    var cafeDict = [CoordinateHashKey: Cafe]()
     
     // MARK: - Initialization
     init() {
@@ -133,6 +139,10 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
             if annotationView == nil {
                 annotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
                 annotationView?.canShowCallout = true
+                
+                let detailButton = UIButton(type: .DetailDisclosure)
+                detailButton.addTarget(self, action: #selector(self.detailButtonTapped(_:)), forControlEvents: .TouchUpInside)
+                annotationView?.rightCalloutAccessoryView = detailButton
             }
             
             
@@ -156,6 +166,27 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         return view
     }
     
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        currentSelectedAnnotationView = view
+    }
+    
+    // MARK: Actions
+    func detailButtonTapped(sender: UIButton) {
+        if let annotationView = currentSelectedAnnotationView {
+            if let annotation = annotationView.annotation {
+                switch annotation.dynamicType {
+                case is CafeAnnotation.Type:
+                    if let cafeAnnotation = annotation as? CafeAnnotation {
+                       print(cafeDict[cafeAnnotation.coordinate.sz_hashValue()]?.name)
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
     // MARK: Private
     @objc private func currentCityDidChange(notification: NSNotification) {
         let city = notification.userInfo![current_city] as! City
@@ -172,6 +203,8 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
                         for cafe in cafeArray {
                             let ann = CafeAnnotation(cafe: cafe)
                             self.mapView.addAnnotation(ann)
+                            
+                            self.cafeDict[ann.coordinate.sz_hashValue()] = cafe
                         }
                     }
                 }
@@ -187,9 +220,4 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
     
 }
 
-extension CLLocation {
-    convenience init(coordinate: CLLocationCoordinate2D) {
-        self.init(latitude: coordinate.latitude, longitude:coordinate.longitude)
-    }
-}
 
