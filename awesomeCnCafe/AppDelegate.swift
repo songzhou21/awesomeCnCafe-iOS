@@ -7,17 +7,28 @@
 //
 
 import UIKit
+import Motif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var themeApplier: MTFDynamicThemeApplier!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        let theme = try! MTFTheme(fromFilesNamed: [ColorsThemeName, LightMappingsThemeName, TypographyThemeName, ControlsThemeName,  NavigationThemeName, ContentThemeName])
+        
+                
+        #if DEBUG_SIMULATOR
+            self.themeApplier = MTFLiveReloadThemeApplier(theme: theme, sourceFile: #file)
+        #else
+            self.themeApplier = MTFDynamicThemeApplier(theme: theme)
+        #endif
+        
         let mvc = MainMapViewController()
-        let nvc = UINavigationController.init(rootViewController: mvc)
+        let nvc = NavigationController(themeApplier: self.themeApplier)
+        nvc.pushViewController(mvc, animated: false)
         
         window?.rootViewController = nvc
         

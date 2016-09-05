@@ -7,3 +7,6 @@ github "tristanhimmelman/AlamofireObjectMapper" ~> 3.0
 
 # Color
 github "thii/SwiftHEXColors"
+
+# Theme
+github "EricHoracek/Motif"

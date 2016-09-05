@@ -1,0 +1,7 @@
+.NavigationBar:
+    tintColor: $PrimaryColor
+#barTintColor: $PrimaryColor
+    barTintColor: $ContentForegroundColor
+#backgroundColor: $ContentForegroundColor
+#text: .TitleText
+#    separatorColor: $SeparatorColor

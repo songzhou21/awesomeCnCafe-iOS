@@ -57,6 +57,20 @@
 		E4B115601D4E467E00417988 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4B1155D1D4E467E00417988 /* Localizable.strings */; };
 		E4B115621D4E566B00417988 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B115611D4E566B00417988 /* ColorConstant.swift */; };
 		E4B115631D4E56EC00417988 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B115611D4E566B00417988 /* ColorConstant.swift */; };
+		E4BBB9B81D7D45FE003E8C3A /* Motif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BBB9B71D7D45FE003E8C3A /* Motif.framework */; };
+		E4BBB9CC1D7D4AF7003E8C3A /* ColorsTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9BB1D7D4AF7003E8C3A /* ColorsTheme.yaml */; };
+		E4BBB9CD1D7D4AF7003E8C3A /* ContentTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9BC1D7D4AF7003E8C3A /* ContentTheme.yaml */; };
+		E4BBB9CE1D7D4AF7003E8C3A /* ControlsTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9BD1D7D4AF7003E8C3A /* ControlsTheme.yaml */; };
+		E4BBB9CF1D7D4AF7003E8C3A /* NavigationTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9BE1D7D4AF7003E8C3A /* NavigationTheme.yaml */; };
+		E4BBB9D01D7D4AF7003E8C3A /* TypographyTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9BF1D7D4AF7003E8C3A /* TypographyTheme.yaml */; };
+		E4BBB9DB1D7D4ED3003E8C3A /* ColorsThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9D61D7D4ED3003E8C3A /* ColorsThemeSymbols.swift */; };
+		E4BBB9DC1D7D4ED3003E8C3A /* ContentThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9D71D7D4ED3003E8C3A /* ContentThemeSymbols.swift */; };
+		E4BBB9DD1D7D4ED3003E8C3A /* ControlsThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9D81D7D4ED3003E8C3A /* ControlsThemeSymbols.swift */; };
+		E4BBB9DE1D7D4ED3003E8C3A /* NavigationThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9D91D7D4ED3003E8C3A /* NavigationThemeSymbols.swift */; };
+		E4BBB9DF1D7D4ED3003E8C3A /* TypographyThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9DA1D7D4ED3003E8C3A /* TypographyThemeSymbols.swift */; };
+		E4BBB9E11D7D4FA2003E8C3A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9E01D7D4FA2003E8C3A /* NavigationController.swift */; };
+		E4BBB9E31D7D53F0003E8C3A /* LightMappingsTheme.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E4BBB9E21D7D53F0003E8C3A /* LightMappingsTheme.yaml */; };
+		E4BBB9E51D7D544E003E8C3A /* LightMappingsThemeSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BBB9E41D7D544E003E8C3A /* LightMappingsThemeSymbols.swift */; };
 		E4BCB0551D3A75B200711ACF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCB0541D3A75B200711ACF /* Utility.swift */; };
 		E4BFEB941D4473D9003B2736 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB931D4473D9003B2736 /* Task.swift */; };
 		E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFEB991D449695003B2736 /* Settings.swift */; };
@@ -124,6 +138,20 @@
 		E4B1155C1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		E4B1155E1D4E467E00417988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		E4B115611D4E566B00417988 /* ColorConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstant.swift; sourceTree = "<group>"; };
+		E4BBB9B71D7D45FE003E8C3A /* Motif.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motif.framework; path = Carthage/Build/iOS/Motif.framework; sourceTree = "<group>"; };
+		E4BBB9BB1D7D4AF7003E8C3A /* ColorsTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColorsTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9BC1D7D4AF7003E8C3A /* ContentTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ContentTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9BD1D7D4AF7003E8C3A /* ControlsTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ControlsTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9BE1D7D4AF7003E8C3A /* NavigationTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NavigationTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9BF1D7D4AF7003E8C3A /* TypographyTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TypographyTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9D61D7D4ED3003E8C3A /* ColorsThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsThemeSymbols.swift; sourceTree = "<group>"; };
+		E4BBB9D71D7D4ED3003E8C3A /* ContentThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentThemeSymbols.swift; sourceTree = "<group>"; };
+		E4BBB9D81D7D4ED3003E8C3A /* ControlsThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsThemeSymbols.swift; sourceTree = "<group>"; };
+		E4BBB9D91D7D4ED3003E8C3A /* NavigationThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationThemeSymbols.swift; sourceTree = "<group>"; };
+		E4BBB9DA1D7D4ED3003E8C3A /* TypographyThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypographyThemeSymbols.swift; sourceTree = "<group>"; };
+		E4BBB9E01D7D4FA2003E8C3A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		E4BBB9E21D7D53F0003E8C3A /* LightMappingsTheme.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LightMappingsTheme.yaml; sourceTree = "<group>"; };
+		E4BBB9E41D7D544E003E8C3A /* LightMappingsThemeSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightMappingsThemeSymbols.swift; sourceTree = "<group>"; };
 		E4BCB0541D3A75B200711ACF /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E4BFEB931D4473D9003B2736 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E4BFEB991D449695003B2736 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -149,6 +177,7 @@
 				E4B115521D4E36F900417988 /* MapKit.framework in Frameworks */,
 				E44C654C1D38B86700F2564C /* Alamofire.framework in Frameworks */,
 				E4BFEBA41D44F05E003B2736 /* SwiftHEXColors.framework in Frameworks */,
+				E4BBB9B81D7D45FE003E8C3A /* Motif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +223,7 @@
 		E44C65501D38B89300F2564C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4BBB9B71D7D45FE003E8C3A /* Motif.framework */,
 				E4B115511D4E36F900417988 /* MapKit.framework */,
 				E4BFEBA31D44F05E003B2736 /* SwiftHEXColors.framework */,
 				E44C65471D38B86700F2564C /* AlamofireObjectMapper.framework */,
@@ -256,9 +286,12 @@
 				E4B1154B1D4DFA1A00417988 /* CafeCommentCell.swift */,
 				E4B1154E1D4E215600417988 /* LayoutConstant.swift */,
 				E4B115611D4E566B00417988 /* ColorConstant.swift */,
+				E4BBB9E01D7D4FA2003E8C3A /* NavigationController.swift */,
 				E425A8971D4DD08B00869C61 /* Extension */,
 				E425A8741D4D043900869C61 /* Annotation */,
 				E48FE4151D3E6BFC00EDA119 /* Model */,
+				E4BBB9BA1D7D4AF7003E8C3A /* Themes */,
+				E4BBB9C01D7D4AF7003E8C3A /* ThemeSymbols */,
 				E44C65541D38BAA800F2564C /* Other */,
 			);
 			path = awesomeCnCafe;
@@ -311,6 +344,32 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
+		E4BBB9BA1D7D4AF7003E8C3A /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBB9BB1D7D4AF7003E8C3A /* ColorsTheme.yaml */,
+				E4BBB9E21D7D53F0003E8C3A /* LightMappingsTheme.yaml */,
+				E4BBB9BC1D7D4AF7003E8C3A /* ContentTheme.yaml */,
+				E4BBB9BD1D7D4AF7003E8C3A /* ControlsTheme.yaml */,
+				E4BBB9BE1D7D4AF7003E8C3A /* NavigationTheme.yaml */,
+				E4BBB9BF1D7D4AF7003E8C3A /* TypographyTheme.yaml */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		E4BBB9C01D7D4AF7003E8C3A /* ThemeSymbols */ = {
+			isa = PBXGroup;
+			children = (
+				E4BBB9D61D7D4ED3003E8C3A /* ColorsThemeSymbols.swift */,
+				E4BBB9D71D7D4ED3003E8C3A /* ContentThemeSymbols.swift */,
+				E4BBB9D81D7D4ED3003E8C3A /* ControlsThemeSymbols.swift */,
+				E4BBB9D91D7D4ED3003E8C3A /* NavigationThemeSymbols.swift */,
+				E4BBB9DA1D7D4ED3003E8C3A /* TypographyThemeSymbols.swift */,
+				E4BBB9E41D7D544E003E8C3A /* LightMappingsThemeSymbols.swift */,
+			);
+			path = ThemeSymbols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,6 +377,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4542B171D387245009B6EAB /* Build configuration list for PBXNativeTarget "awesomeCnCafe" */;
 			buildPhases = (
+				E4BBB9B91D7D4985003E8C3A /* Generate Theme Symbols */,
 				E4542AEB1D387244009B6EAB /* Sources */,
 				E4542AEC1D387244009B6EAB /* Frameworks */,
 				E4542AED1D387244009B6EAB /* Resources */,
@@ -426,10 +486,16 @@
 			files = (
 				E4B115591D4E467100417988 /* Localizable.strings in Resources */,
 				E4B1155F1D4E467E00417988 /* InfoPlist.strings in Resources */,
+				E4BBB9CE1D7D4AF7003E8C3A /* ControlsTheme.yaml in Resources */,
 				E4542AFD1D387245009B6EAB /* LaunchScreen.storyboard in Resources */,
+				E4BBB9CF1D7D4AF7003E8C3A /* NavigationTheme.yaml in Resources */,
 				E4B115601D4E467E00417988 /* Localizable.strings in Resources */,
 				E4B115581D4E467100417988 /* InfoPlist.strings in Resources */,
+				E4BBB9D01D7D4AF7003E8C3A /* TypographyTheme.yaml in Resources */,
 				E4BFEB9C1D44A077003B2736 /* settings.plist in Resources */,
+				E4BBB9CC1D7D4AF7003E8C3A /* ColorsTheme.yaml in Resources */,
+				E4BBB9CD1D7D4AF7003E8C3A /* ContentTheme.yaml in Resources */,
+				E4BBB9E31D7D53F0003E8C3A /* LightMappingsTheme.yaml in Resources */,
 				E4542AFA1D387245009B6EAB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +527,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftHEXColors.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Motif.framework",
 			);
 			outputPaths = (
 			);
@@ -484,6 +551,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		E4BBB9B91D7D4985003E8C3A /* Generate Theme Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Theme Symbols";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/usr/local/bin\"\nexport CLI_TOOL='motif'\n\nwhich \"${CLI_TOOL}\"\n\nif [ $? -ne 0  ]; then exit 0; fi\n\nexport THEMES_DIR=\"${SRCROOT}/awesomeCnCafe/Themes\"\nexport OUTPUT_DIR=\"${SRCROOT}/awesomeCnCafe/ThemeSymbols\"\n\nfind \"${THEMES_DIR}\" -name '*Theme.yaml' |  sed 's/^/-t /' | xargs \"${CLI_TOOL}\" -s -o \"${OUTPUT_DIR}\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -491,6 +572,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4BBB9E51D7D544E003E8C3A /* LightMappingsThemeSymbols.swift in Sources */,
 				E425A87E1D4DCAF300869C61 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				E425A8731D4D01E000869C61 /* Annotation.swift in Sources */,
 				E4B1154C1D4DFA1A00417988 /* CafeCommentCell.swift in Sources */,
@@ -498,11 +580,17 @@
 				E425A87A1D4DA61100869C61 /* CafeAnnotationDetailTableViewController.swift in Sources */,
 				E4BFEB9A1D449695003B2736 /* Settings.swift in Sources */,
 				E4D3F0A41D3A62D3003FF502 /* NetworkManager.swift in Sources */,
+				E4BBB9E11D7D4FA2003E8C3A /* NavigationController.swift in Sources */,
 				E4BCB0551D3A75B200711ACF /* Utility.swift in Sources */,
+				E4BBB9DB1D7D4ED3003E8C3A /* ColorsThemeSymbols.swift in Sources */,
+				E4BBB9DC1D7D4ED3003E8C3A /* ContentThemeSymbols.swift in Sources */,
+				E4BBB9DF1D7D4ED3003E8C3A /* TypographyThemeSymbols.swift in Sources */,
 				E4BFEB941D4473D9003B2736 /* Task.swift in Sources */,
+				E4BBB9DD1D7D4ED3003E8C3A /* ControlsThemeSymbols.swift in Sources */,
 				E425A8921D4DCFCA00869C61 /* CLLocation+Extension.swift in Sources */,
 				E4D3F0A21D3A6222003FF502 /* City.swift in Sources */,
 				E4542B231D3872D8009B6EAB /* MainMapViewController.swift in Sources */,
+				E4BBB9DE1D7D4ED3003E8C3A /* NavigationThemeSymbols.swift in Sources */,
 				E4BFEBA21D44E67D003B2736 /* CafeAnnotationView.swift in Sources */,
 				E4D3F09A1D39DC84003FF502 /* LocationManager.swift in Sources */,
 				E4D3F09C1D3A2759003FF502 /* MapContainerView.swift in Sources */,
@@ -716,6 +804,7 @@
 				);
 				INFOPLIST_FILE = awesomeCnCafe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[sdk=iphonesimulator*]" = "-D DEBUG_SIMULATOR";
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
