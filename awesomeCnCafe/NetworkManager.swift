@@ -20,24 +20,24 @@ class NetworkManager {
     }()
     
     func requestSupportCities(){
-        Alamofire.request(.GET, repo_read_me).responseString { [unowned self] ( response: Response<String, NSError>) in
-            if let string = response.result.value {
-                let cities = self.cityArrayFromString(string)
-                debugPrint("get supported cities count: \(cities.count)")
-                for city in cities {
-                    let cityObject = City(pinyin: city)
-                    
-                    self.locationManager.supportCities[city] = cityObject
-                }
-                
-                // check if current city is supported
-                if let currentCity = self.locationManager.currentCity {
-                    if self.locationManager.supportCities[currentCity.pinyin] != nil {
-                            NotificationCenter.default.post(Notification.init(name: currentCityDidSupportNotification, object: self, userInfo: [currentCityKey: currentCity]))
-                    }
-                }
-            }
-        }
+        Alamofire.request(repo_read_me).responseString { [unowned self](response: DataResponse<String>) in
+                        if let string = response.result.value {
+                            let cities = self.cityArrayFromString(string)
+                            debugPrint("get supported cities count: \(cities.count)")
+                            for city in cities {
+                                let cityObject = City(pinyin: city)
+            
+                                self.locationManager.supportCities[city] = cityObject
+                            }
+            
+                            // check if current city is supported
+                            if let currentCity = self.locationManager.currentCity {
+                                if self.locationManager.supportCities[currentCity.pinyin] != nil {
+                                        NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: currentCityDidSupportNotification), object: self, userInfo: [currentCityKey: currentCity]))
+                                }
+                            }
+                        }
+        };
     }
     
     func getNearbyCafe(inCity city: City, completion: @escaping (_ cafeArray: [Cafe]?, _ error: NSError?) -> Void) {
@@ -46,11 +46,18 @@ class NetworkManager {
             debugPrint("search nearyby cafe in \(name)")
             debugPrint("requesting \(url)")
             
-            Alamofire.request(.GET, url).responseObject {[unowned self] (response: Response<CafeResponse, NSError>) in
+            Alamofire.request(url).responseObject(completionHandler: { (response: DataResponse<CafeResponse>) in
                 let cafeResponse = response.result.value
-                completion(cafeArray: cafeResponse?.cafeArray, error: response.result.error)
+                
+                if let e = response.result.error {
+                    completion(cafeResponse?.cafeArray, e as NSError)
+                } else {
+                    completion(cafeResponse?.cafeArray, nil)
+                }
+                
                 self.locationManager.requestedCities[city.pinyin] = city
-            }
+
+            });
         }
     }
     

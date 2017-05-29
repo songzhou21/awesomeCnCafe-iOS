@@ -21,12 +21,12 @@ class Cafe: Location{
     var comment: [Comment]?
     var price: String?
     
-    required init?(_ map: Map) {
-        super.init(map)
+    required init?(map: Map) {
+        super.init(map: map)
     }
     
-    override func mapping(_ map: Map) {
-        super.mapping(map)
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         
         markerColor <- map["properties.marker-color"]
         markerSymbol <- map["properties.marker-symbol"]
@@ -55,19 +55,20 @@ class Author {
 class CafeResponse: Mappable {
     var cafeArray: [Cafe]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
        cafeArray <- map["features"]
     }
+
 }
 
 class CommentTransform: TransformType {
     typealias Object = [Comment]
     typealias JSON = [String: AnyObject]
     
-    func transformFromJSON(_ value: AnyObject?) -> Object? {
+    func transformFromJSON(_ value: Any?) -> [Comment]? {
         var comments: [Comment]?
         if let dict = value as? [String: AnyObject] {
             for (key, value) in dict {
@@ -95,15 +96,17 @@ class CommentTransform: TransformType {
         return comments
     }
     
-    func transformToJSON(_ value: Object?) -> JSON? {
-        return nil
+    func transformToJSON(_ value: [Comment]?) -> [String : AnyObject]? {
+        return nil;
     }
 }
 
 class PropertiesTransform: TransformType {
+
+
     typealias Object = CafeProperty
     
-    func transformFromJSON(_ value: AnyObject?) -> Object? {
+    func transformFromJSON(_ value: Any?) -> CafeProperty? {
         var properties: CafeProperty?
         if let dict = value as? JSON {
             let notValidKey = [
@@ -127,6 +130,7 @@ class PropertiesTransform: TransformType {
         return properties
     }
     
+
     func transformToJSON(_ value: Object?) -> JSON? {
         return nil
     }

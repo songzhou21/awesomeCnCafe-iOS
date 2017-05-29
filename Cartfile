@@ -1,9 +1,9 @@
 # Networking
-github "Alamofire/Alamofire" ~> 3.4
+github "Alamofire/Alamofire" ~> 4.4
 
 # Mapper
-github "Hearst-DD/ObjectMapper" ~> 1.3
-github "tristanhimmelman/AlamofireObjectMapper" ~> 3.0
+github "Hearst-DD/ObjectMapper" ~> 2.2
+github "tristanhimmelman/AlamofireObjectMapper" ~> 4.0
 
 # Color
 github "thii/SwiftHEXColors"

@@ -53,9 +53,9 @@ class Settings {
 
 // MARK: Subscript
 extension Settings {
-    subscript(key: String) -> AnyObject? {
+    subscript(key: String) -> Any? {
         get {
-            return dict.value(forKey: key) as AnyObject
+            return dict.value(forKey: key) as Any
         }
         
         set {
