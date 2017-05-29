@@ -9,7 +9,7 @@
 import UIKit
 import SwiftHEXColors
 
-let defaultColor = UIColor.grayColor()
+let defaultColor = UIColor.gray
 
 class CafeAnnotation: PointAnnotation {
     var tintColor = defaultColor

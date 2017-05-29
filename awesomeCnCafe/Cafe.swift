@@ -25,7 +25,7 @@ class Cafe: Location{
         super.init(map)
     }
     
-    override func mapping(map: Map) {
+    override func mapping(_ map: Map) {
         super.mapping(map)
         
         markerColor <- map["properties.marker-color"]
@@ -58,7 +58,7 @@ class CafeResponse: Mappable {
     required init?(_ map: Map) {
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
        cafeArray <- map["features"]
     }
 }
@@ -67,7 +67,7 @@ class CommentTransform: TransformType {
     typealias Object = [Comment]
     typealias JSON = [String: AnyObject]
     
-    func transformFromJSON(value: AnyObject?) -> Object? {
+    func transformFromJSON(_ value: AnyObject?) -> Object? {
         var comments: [Comment]?
         if let dict = value as? [String: AnyObject] {
             for (key, value) in dict {
@@ -95,7 +95,7 @@ class CommentTransform: TransformType {
         return comments
     }
     
-    func transformToJSON(value: Object?) -> JSON? {
+    func transformToJSON(_ value: Object?) -> JSON? {
         return nil
     }
 }
@@ -103,14 +103,14 @@ class CommentTransform: TransformType {
 class PropertiesTransform: TransformType {
     typealias Object = CafeProperty
     
-    func transformFromJSON(value: AnyObject?) -> Object? {
+    func transformFromJSON(_ value: AnyObject?) -> Object? {
         var properties: CafeProperty?
         if let dict = value as? JSON {
             let notValidKey = [
                 "名称", "下载速度", "marker-color", "marker-symbol", "参考价格"
             ]
             for (key, value) in dict {
-                if key.lowercaseString.hasPrefix("speedtest")
+                if key.lowercased().hasPrefix("speedtest")
                     || key.hasPrefix("评论")
                     || notValidKey.contains(key) {
                     continue
@@ -127,7 +127,7 @@ class PropertiesTransform: TransformType {
         return properties
     }
     
-    func transformToJSON(value: Object?) -> JSON? {
+    func transformToJSON(_ value: Object?) -> JSON? {
         return nil
     }
 }

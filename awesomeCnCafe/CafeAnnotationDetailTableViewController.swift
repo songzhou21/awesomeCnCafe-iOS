@@ -15,13 +15,13 @@ let cafeCommentCellDefaultCellHeight: CGFloat = 54.5 // two lines
 let cafeDetailCellHeight: CGFloat = 40
 
 class CafeAnnotationDetailTableViewController: UITableViewController {
-    private let cafe: Cafe
-    private var dataSource = [(String, [AnyObject])]()
+    fileprivate let cafe: Cafe
+    fileprivate var dataSource = [(String, [AnyObject])]()
 
     init(cafe: Cafe) {
        self.cafe = cafe
         
-       super.init(style: .Grouped)
+       super.init(style: .grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +31,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cafe_properties_cell_identifier)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cafe_properties_cell_identifier)
         
         setUpDataSouce()
     }
@@ -43,38 +43,38 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return dataSource.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let section = dataSource[section]
         return section.1.count
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dataSource[section].0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = dataSource[indexPath.section].1
         var resultCell: UITableViewCell!
         
         let data = section[indexPath.row]
-        switch data.dynamicType {
+        switch type(of: data) {
         case is String.Type:
             fallthrough
         case is NSString.Type:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cafe_properties_cell_identifier)!
-            cell.selectionStyle = .None
+            let cell = tableView.dequeueReusableCell(withIdentifier: cafe_properties_cell_identifier)!
+            cell.selectionStyle = .none
         
            cell.textLabel?.text = data as? String
             
             resultCell = cell
         case is CafeCommentCellData.Type:
-            var commentCell = tableView.dequeueReusableCellWithIdentifier(cafe_comment_cell_identifier) as? CafeCommentCell
+            var commentCell = tableView.dequeueReusableCell(withIdentifier: cafe_comment_cell_identifier) as? CafeCommentCell
             if commentCell == nil {
                 commentCell = CafeCommentCell(reuseIdentifier: cafe_comment_cell_identifier)
             }
@@ -94,12 +94,12 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
         return resultCell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = dataSource[indexPath.section].1
         
         let data = section[indexPath.row]
         
-        switch data.dynamicType {
+        switch type(of: data) {
         case is CafeCommentCellData.Type:
             let comment = data as! CafeCommentCellData
             if let height = comment.height {
@@ -117,7 +117,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
     // MARK: Private
     func setUpDataSouce() {
         if let speeds = cafe.networkSpeed {
-            dataSource.append((NSLocalizedString("speed", comment: ""), speeds))
+            dataSource.append((NSLocalizedString("speed", comment: ""), speeds as [AnyObject]))
         }
         
         if let comments = cafe.comment {
@@ -128,7 +128,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
         }
         
         if let price = cafe.price {
-            dataSource.append((NSLocalizedString("price", comment: ""), [price]))
+            dataSource.append((NSLocalizedString("price", comment: ""), [price as AnyObject]))
         }
         
         if let properties = cafe.properties {
@@ -136,7 +136,7 @@ class CafeAnnotationDetailTableViewController: UITableViewController {
                 return "\(key):\(properties[key]!)"
             }
             
-            dataSource.append((NSLocalizedString("other", comment: ""), Array(values)))
+            dataSource.append((NSLocalizedString("other", comment: ""), Array(values) as [AnyObject]))
         }
     }
 }

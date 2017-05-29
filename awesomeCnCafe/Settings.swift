@@ -13,18 +13,18 @@ class Settings {
     var dict: NSMutableDictionary!
     var path: String!
     
-    private init () {
+    fileprivate init () {
         readFromFile()
     }
     
-    private func readFromFile () {
-        if let documentsDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first {
-            path = documentsDir.stringByAppendingString("/settings.plist")
+    fileprivate func readFromFile () {
+        if let documentsDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+            path = documentsDir + "/settings.plist"
             
-            if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-                let bundlePath = NSBundle.mainBundle().pathForResource("settings", ofType: "plist")!
+            if !FileManager.default.fileExists(atPath: path) {
+                let bundlePath = Bundle.main.path(forResource: "settings", ofType: "plist")!
                 do {
-                    try NSFileManager.defaultManager().copyItemAtPath(bundlePath, toPath: path)
+                    try FileManager.default.copyItem(atPath: bundlePath, toPath: path)
                 } catch _ {
                     
                 }
@@ -38,7 +38,7 @@ class Settings {
     func writeToFile() {
         setLastLocation()
         
-       let success = dict.writeToFile(path, atomically: true)
+       let success = dict.write(toFile: path, atomically: true)
         
         if success {
             debugPrint("write setting.plist to disk successfull")
@@ -55,7 +55,7 @@ class Settings {
 extension Settings {
     subscript(key: String) -> AnyObject? {
         get {
-            return dict.valueForKey(key)
+            return dict.value(forKey: key) as AnyObject
         }
         
         set {

@@ -12,12 +12,12 @@ class MapContainerView: UIView{
     convenience init() {
         self.init(frame: CGRect.zero)
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
     }
     
     /// disable touch event on self, pass to subViews
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let hitView = super.hitTest(point, withEvent: event)
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
         
         return hitView == self ? nil : hitView
     }

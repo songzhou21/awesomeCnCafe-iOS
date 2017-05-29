@@ -13,14 +13,14 @@ class CafeCommentCell: UITableViewCell {
     var textView: UITextView!
     
     init(reuseIdentifier: String?) {
-        super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         self.initTextView()
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,31 +30,31 @@ class CafeCommentCell: UITableViewCell {
     // MARK: Init
     func initTextView(){
         textView = UITextView()
-        textView.scrollEnabled = false
-        textView.editable = false
-        textView.selectable = false
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
         self.contentView.addSubview(textView)
         
         textView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activateConstraints([
-            textView.leadingAnchor.constraintEqualToAnchor(self.contentView.leadingAnchor, constant: Layout.horizontalPadding),
-            textView.trailingAnchor.constraintEqualToAnchor(self.contentView.trailingAnchor, constant: -Layout.horizontalPadding),
-            textView.topAnchor.constraintEqualToAnchor(self.contentView.topAnchor),
-            textView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor),
-            textView.heightAnchor.constraintGreaterThanOrEqualToConstant(cafeCommentCellDefaultCellHeight)
+        NSLayoutConstraint.activate([
+            textView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: Layout.horizontalPadding),
+            textView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -Layout.horizontalPadding),
+            textView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            textView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: cafeCommentCellDefaultCellHeight)
             ])
     }
 }
 
 extension CafeCommentCell {
-    func setupDataSource(comment: Comment){
+    func setupDataSource(_ comment: Comment){
         if let user = comment.author?.userName, let content = comment.content {
             let string = "\(user): \(content)"
             let attributedString = NSMutableAttributedString(string: string)
             let ns_sring = string as NSString
-            attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.grayColor()], range: ns_sring.rangeOfString(user))
-            attributedString.addAttributes([NSFontAttributeName: UIFont.systemFontOfSize(16)], range: NSMakeRange(0, ns_sring.length))
+            attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.gray], range: ns_sring.range(of: user))
+            attributedString.addAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16)], range: NSMakeRange(0, ns_sring.length))
             
             self.textView.attributedText = attributedString
         }
@@ -67,7 +67,7 @@ extension CafeCommentCell {
     func textViewHeight() -> CGFloat {
         self.layoutIfNeeded()
         
-        let maxSize = CGSize(width: self.textView.bounds.width, height: CGFloat.max)
+        let maxSize = CGSize(width: self.textView.bounds.width, height: CGFloat.greatestFiniteMagnitude)
         return self.textView.sizeThatFits(maxSize).height
     }
 }

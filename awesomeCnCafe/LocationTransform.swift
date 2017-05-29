@@ -7,7 +7,7 @@ public struct LocationTransform {
     
     static let EARTH_R: Double = 6378137.0
 
-    static func isOutOfChina(lat: Double, lng: Double) -> Bool {
+    static func isOutOfChina(_ lat: Double, lng: Double) -> Bool {
 
         if lng < 72.004 || lng > 137.8347 {
             return true
@@ -18,7 +18,7 @@ public struct LocationTransform {
         return false
     }
 
-    static func transform(x: Double, y: Double) -> (lat: Double, lng: Double) {
+    static func transform(_ x: Double, y: Double) -> (lat: Double, lng: Double) {
 
         let xy = x * y
         let absX = sqrt(fabs(x))
@@ -44,7 +44,7 @@ public struct LocationTransform {
         return (lat, lng)
     }
 
-    static func delta(lat: Double, lng: Double) -> (dLat: Double,  dLng: Double) {
+    static func delta(_ lat: Double, lng: Double) -> (dLat: Double,  dLng: Double) {
         let ee = 0.00669342162296594323
         let radLat = lat / 180.0 * M_PI
         var magic = sin(radLat)
@@ -59,7 +59,7 @@ public struct LocationTransform {
     /**
      *  wgs2gcj convert WGS-84 coordinate(wgsLat, wgsLng) to GCJ-02 coordinate(gcjLat, gcjLng).
      */
-    public static func wgs2gcj(wgsLat: Double, wgsLng: Double) -> (gcjLat: Double, gcjLng: Double) {
+    public static func wgs2gcj(_ wgsLat: Double, wgsLng: Double) -> (gcjLat: Double, gcjLng: Double) {
         if isOutOfChina(wgsLat, lng: wgsLng) {
             return (wgsLat, wgsLng)
         }
@@ -71,7 +71,7 @@ public struct LocationTransform {
      *  gcj2wgs convert GCJ-02 coordinate(gcjLat, gcjLng) to WGS-84 coordinate(wgsLat, wgsLng).
      *  The output WGS-84 coordinate's accuracy is 1m to 2m. If you want more exactly result, use gcj2wgs_exact.
      */
-    public static func gcj2wgs(gcjLat: Double, gcjLng: Double) -> (wgsLat: Double, wgsLng: Double) {
+    public static func gcj2wgs(_ gcjLat: Double, gcjLng: Double) -> (wgsLat: Double, wgsLng: Double) {
         if isOutOfChina(gcjLat, lng: gcjLng) {
             return (gcjLat, gcjLng)
         }
@@ -83,7 +83,7 @@ public struct LocationTransform {
      *  gcj2wgs_exact convert GCJ-02 coordinate(gcjLat, gcjLng) to WGS-84 coordinate(wgsLat, wgsLng).
      *  The output WGS-84 coordinate's accuracy is less than 0.5m, but much slower than gcj2wgs.
      */
-    public static func gcj2wgs_exact(gcjLat: Double, gcjLng: Double) -> (wgsLat: Double, wgsLng: Double) {
+    public static func gcj2wgs_exact(_ gcjLat: Double, gcjLng: Double) -> (wgsLat: Double, wgsLng: Double) {
         let initDelta = 0.01, threshold = 0.000001
         var (dLat, dLng) = (initDelta, initDelta)
         var (mLat, mLng) = (gcjLat - dLat, gcjLng - dLng)
@@ -113,7 +113,7 @@ public struct LocationTransform {
     /**
      *  Distance calculate the distance between point(latA, lngA) and point(latB, lngB), unit in meter.
      */
-    public static func Distance(latA: Double, lngA: Double, latB: Double, lngB: Double) -> Double {
+    public static func Distance(_ latA: Double, lngA: Double, latB: Double, lngB: Double) -> Double {
         let arcLatA = latA * M_PI / 180
         let arcLatB = latB * M_PI / 180
         let x = cos(arcLatA) * cos(arcLatB) * cos((lngA-lngB) * M_PI/180)
@@ -133,7 +133,7 @@ public struct LocationTransform {
 
 extension LocationTransform {
 
-    public static func gcj2bd(gcjLat: Double, gcjLng: Double) -> (bdLat: Double, bdLng: Double) {
+    public static func gcj2bd(_ gcjLat: Double, gcjLng: Double) -> (bdLat: Double, bdLng: Double) {
         if isOutOfChina(gcjLat, lng: gcjLng) {
             return (gcjLat, gcjLng)
         }
@@ -145,7 +145,7 @@ extension LocationTransform {
         return (bdLat, bdLng)
     }
 
-    public static func bd2gcj(bdLat: Double, bdLng: Double) -> (gcjLat: Double, gcjLng: Double) {
+    public static func bd2gcj(_ bdLat: Double, bdLng: Double) -> (gcjLat: Double, gcjLng: Double) {
         if isOutOfChina(bdLat, lng: bdLng) {
             return (bdLat, bdLng)
         }
@@ -157,12 +157,12 @@ extension LocationTransform {
         return (gcjLat, gcjLng)
     }
 
-    public static func wgs2bd(wgsLat: Double, wgsLng: Double) -> (bdLat: Double, bdLng: Double) {
+    public static func wgs2bd(_ wgsLat: Double, wgsLng: Double) -> (bdLat: Double, bdLng: Double) {
         let (gcjLat, gcjLng) = wgs2gcj(wgsLat, wgsLng: wgsLng)
         return gcj2bd(gcjLat, gcjLng: gcjLng)
     }
 
-    public static func bd2wgs(bdLat: Double, bdLng: Double) -> (wgsLat: Double, wgsLng: Double) {
+    public static func bd2wgs(_ bdLat: Double, bdLng: Double) -> (wgsLat: Double, wgsLng: Double) {
         let (gcjLat, gcjLng) = bd2gcj(bdLat, bdLng: bdLng)
         return gcj2wgs(gcjLat, gcjLng: gcjLng)
     }

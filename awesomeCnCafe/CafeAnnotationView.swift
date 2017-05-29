@@ -25,19 +25,19 @@ class CafeAnnotationView: MKAnnotationView {
 }
 
 extension CafeAnnotationView {
-    func annotationImage(tintColor: UIColor) -> UIImage {
-        let backgroundImage = UIImage.init(named: "cafe_background")?.imageWithRenderingMode(.AlwaysTemplate)
+    func annotationImage(_ tintColor: UIColor) -> UIImage {
+        let backgroundImage = UIImage.init(named: "cafe_background")?.withRenderingMode(.alwaysTemplate)
         let outlineImage = UIImage(named: "cafe_outline")
         
         let size = (backgroundImage?.size)!
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         tintColor.set()
         
-        backgroundImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        outlineImage?.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        backgroundImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        outlineImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
 }

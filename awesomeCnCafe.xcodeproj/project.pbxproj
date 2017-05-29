@@ -382,6 +382,7 @@
 					E4542AEE1D387244009B6EAB = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2484Z5XMVT;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -390,10 +391,12 @@
 					};
 					E4542B021D387245009B6EAB = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = E4542AEE1D387244009B6EAB;
 					};
 					E4542B0D1D387245009B6EAB = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = E4542AEE1D387244009B6EAB;
 					};
 				};
@@ -719,6 +722,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -737,6 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -752,6 +757,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/awesomeCnCafe.app/awesomeCnCafe";
 			};
 			name = Debug;
@@ -768,6 +774,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/awesomeCnCafe.app/awesomeCnCafe";
 			};
 			name = Release;
@@ -783,6 +790,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = awesomeCnCafe;
 			};
 			name = Debug;
@@ -798,6 +806,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.songzhou.awesomeCnCafeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = awesomeCnCafe;
 			};
 			name = Release;

@@ -11,7 +11,7 @@ import MapKit
 let delta: CLLocationDegrees = 1000
 
 extension MKMapView {
-    func jumpToCoordinateWithDefaultZoomLebel(coordinate: CLLocationCoordinate2D, animated: Bool) {
+    func jumpToCoordinateWithDefaultZoomLebel(_ coordinate: CLLocationCoordinate2D, animated: Bool) {
         let region = MKCoordinateRegionMakeWithDistance(coordinate, delta, delta)
         self.setRegion(region, animated: animated)
     }

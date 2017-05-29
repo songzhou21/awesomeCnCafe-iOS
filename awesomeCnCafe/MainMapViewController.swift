@@ -65,11 +65,11 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(containerView)
         
-        NSLayoutConstraint.activateConstraints([
-            containerView.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor),
-            containerView.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor),
-            containerView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant:CGRectGetHeight((self.navigationController?.navigationBar.frame)!)),
-            containerView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor)
+        NSLayoutConstraint.activate([
+            containerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            containerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant:(self.navigationController?.navigationBar.frame)!.height),
+            containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
     }
     
@@ -78,11 +78,11 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.addSubview(toolbar)
         
-        NSLayoutConstraint.activateConstraints([
-            toolbar.leftAnchor.constraintEqualToAnchor(self.containerView.leftAnchor),
-            toolbar.rightAnchor.constraintEqualToAnchor(self.containerView.rightAnchor),
-            toolbar.bottomAnchor.constraintEqualToAnchor(self.containerView.bottomAnchor),
-            toolbar.heightAnchor.constraintEqualToConstant(toolbar_height)
+        NSLayoutConstraint.activate([
+            toolbar.leftAnchor.constraint(equalTo: self.containerView.leftAnchor),
+            toolbar.rightAnchor.constraint(equalTo: self.containerView.rightAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: toolbar_height)
             ])
     }
     
@@ -113,30 +113,30 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityDidChange(_:)), name: currentCityDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityDidSupport(_:)), name: currentCityDidSupportNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currentCityNotSupport(_:)), name: currentCityNotSupportNotification, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentCityDidChange(_:)), name: NSNotification.Name(rawValue: currentCityDidChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentCityDidSupport(_:)), name: NSNotification.Name(rawValue: currentCityDidSupportNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentCityNotSupport(_:)), name: NSNotification.Name(rawValue: currentCityNotSupportNotification), object: nil)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: MKMapViewDelegate
-    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         let location = CLLocation(coordinate: mapView.centerCoordinate)
         locationManager.getCurrentCity(withLocation: location)
         
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var view: MKAnnotationView?
         
-        switch annotation.dynamicType {
+        switch type(of: annotation) {
         case is CafeAnnotation.Type:
-            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(cafe_annotation_identifier)
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: cafe_annotation_identifier)
             if annotationView == nil {
                 annotationView = CafeAnnotationView(annotation: annotation, reuseIdentifier: cafe_annotation_identifier)
                 annotationView?.canShowCallout = true
@@ -145,15 +145,15 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
 //                let image = UIImage(named: "map_disclosure")
 //                detailButton.setImage(image, forState: .Normal)
                 
-                let detailButton = UIButton(type: .DetailDisclosure)
-                detailButton.addTarget(self, action: #selector(self.detailButtonTapped(_:)), forControlEvents: .TouchUpInside)
+                let detailButton = UIButton(type: .detailDisclosure)
+                detailButton.addTarget(self, action: #selector(self.detailButtonTapped(_:)), for: .touchUpInside)
                 
                 
                 let navigationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-                let navigaitonImage = UIImage(named: "action-directions")?.imageWithRenderingMode(.AlwaysTemplate)
-                navigationButton.setImage(navigaitonImage, forState: .Normal)
+                let navigaitonImage = UIImage(named: "action-directions")?.withRenderingMode(.alwaysTemplate)
+                navigationButton.setImage(navigaitonImage, for: UIControlState())
                 navigationButton.tintColor = UIColor(hex: Color.calloutBlue)
-                navigationButton.addTarget(self, action: #selector(self.navigationButtonTapped(_:)), forControlEvents: .TouchUpInside)
+                navigationButton.addTarget(self, action: #selector(self.navigationButtonTapped(_:)), for: .touchUpInside)
                 
                 annotationView?.rightCalloutAccessoryView = detailButton
                 annotationView?.leftCalloutAccessoryView = navigationButton
@@ -181,15 +181,15 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         return view
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         currentSelectedAnnotationView = view
     }
     
     // MARK: Actions
-    func detailButtonTapped(sender: UIButton) {
+    func detailButtonTapped(_ sender: UIButton) {
         if let annotationView = currentSelectedAnnotationView {
             if let annotation = annotationView.annotation {
-                switch annotation.dynamicType {
+                switch type(of: annotation) {
                 case is CafeAnnotation.Type:
                     if let cafeAnnotation = annotation as? CafeAnnotation {
                         if let cafe = cafeDict[cafeAnnotation.coordinate.sz_hashValue()] {
@@ -205,7 +205,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func navigationButtonTapped(sender: UIButton) {
+    func navigationButtonTapped(_ sender: UIButton) {
         let userLocationItem = MKMapItem(placemark:MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: [
             CNPostalAddressStreetKey: NSLocalizedString("current_location", comment: "")
             ]))
@@ -220,20 +220,20 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         if let destinationItem = destinationItem {
-            MKMapItem.openMapsWithItems([userLocationItem, destinationItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
+            MKMapItem.openMaps(with: [userLocationItem, destinationItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
         } else {
-            MKMapItem.openMapsWithItems([userLocationItem], launchOptions: nil)
+            MKMapItem.openMaps(with: [userLocationItem], launchOptions: nil)
         }
         
     }
     
     // MARK: Private
-    @objc private func currentCityDidChange(notification: NSNotification) {
+    @objc fileprivate func currentCityDidChange(_ notification: Notification) {
         let city = notification.userInfo![currentCityKey] as! City
         self.title = city.name
     }
     
-    @objc private func currentCityDidSupport(notification: NSNotification) {
+    @objc fileprivate func currentCityDidSupport(_ notification: Notification) {
         let city = notification.userInfo![currentCityKey] as! City
         debugPrint("\(city.name) support")
         if locationManager.requestedCities[city.pinyin] == nil {
@@ -252,7 +252,7 @@ class MainMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @objc private func currentCityNotSupport(notification: NSNotification) {
+    @objc fileprivate func currentCityNotSupport(_ notification: Notification) {
         let city = notification.userInfo![currentCityKey] as! City
         debugPrint("\(city.name) not support")
     }

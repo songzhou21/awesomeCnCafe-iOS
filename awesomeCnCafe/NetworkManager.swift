@@ -33,15 +33,15 @@ class NetworkManager {
                 // check if current city is supported
                 if let currentCity = self.locationManager.currentCity {
                     if self.locationManager.supportCities[currentCity.pinyin] != nil {
-                            NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: currentCityDidSupportNotification, object: self, userInfo: [currentCityKey: currentCity]))
+                            NotificationCenter.default.post(Notification.init(name: currentCityDidSupportNotification, object: self, userInfo: [currentCityKey: currentCity]))
                     }
                 }
             }
         }
     }
     
-    func getNearbyCafe(inCity city: City, completion: (cafeArray: [Cafe]?, error: NSError?) -> Void) {
-        if let cityPinyin = city.pinyin, name = city.name {
+    func getNearbyCafe(inCity city: City, completion: @escaping (_ cafeArray: [Cafe]?, _ error: NSError?) -> Void) {
+        if let cityPinyin = city.pinyin, let name = city.name {
             let url = "\(base_url)\(cityPinyin).geojson"
             debugPrint("search nearyby cafe in \(name)")
             debugPrint("requesting \(url)")
@@ -55,22 +55,22 @@ class NetworkManager {
     }
     
     // MARK: Private
-    private func cityArrayFromString(string: String) -> [String] {
+    fileprivate func cityArrayFromString(_ string: String) -> [String] {
         var result = [String]()
         
-        let lines = string.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        let lines = string.components(separatedBy: CharacterSet.newlines)
         
         for i in 0 ..< lines.count {
             if lines[i].hasPrefix("##") {
-                if lines[i].containsString("城市列表") { // start section
+                if lines[i].contains("城市列表") { // start section
                     for j in i+1 ..< lines.count {
                         let line = lines[j]
                         if line.hasPrefix("##") { //end section
                             return result
                         }
                         if var city = matchesForRegexInText("\\w+.geojson", text: line).first {
-                            if let range = city.rangeOfString(".geojson") {
-                                city.removeRange(range)
+                            if let range = city.range(of: ".geojson") {
+                                city.removeSubrange(range)
                                 result.append(city)
                             }
                         }

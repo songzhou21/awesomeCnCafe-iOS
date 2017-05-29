@@ -9,8 +9,8 @@
 import UIKit
 
 class CafeAnnotationDetailViewController: UIViewController {
-    private let cafe: Cafe
-    lazy private var tableViewController: CafeAnnotationDetailTableViewController = {
+    fileprivate let cafe: Cafe
+    lazy fileprivate var tableViewController: CafeAnnotationDetailTableViewController = {
         return CafeAnnotationDetailTableViewController(cafe: self.cafe)
     }()
 

@@ -8,5 +8,5 @@
 
 import Foundation
 
-typealias Success = (result: AnyObject?) -> Void
-typealias Fail = (error: NSError) -> Void
+typealias Success = (_ result: AnyObject?) -> Void
+typealias Fail = (_ error: NSError) -> Void

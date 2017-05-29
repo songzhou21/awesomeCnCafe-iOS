@@ -18,7 +18,7 @@ class Location: Mappable {
     required init?(_ map: Map) {
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         name <- map["properties.名称"]
         location <- (map["geometry.coordinates"], CLLocationTransform())
     }
@@ -41,8 +41,8 @@ class CLLocationTransform: TransformType {
     typealias Object = CLLocation
     typealias JSON = [String: AnyObject]
     
-    func transformFromJSON(value: AnyObject?) -> Object? {
-        if let coordList = value as? [Double] where coordList.count == 2 {
+    func transformFromJSON(_ value: AnyObject?) -> Object? {
+        if let coordList = value as? [Double], coordList.count == 2 {
             let coordinate = CLLocationCoordinate2D(latitude: coordList[1], longitude: coordList[0])
             return CLLocation(coordinate: coordinate.toMars())
         }
@@ -50,7 +50,7 @@ class CLLocationTransform: TransformType {
         return nil
     }
     
-    func transformToJSON(value: Object?) -> JSON? {
+    func transformToJSON(_ value: Object?) -> JSON? {
         if let location = value {
             return ["coordinates": [Double(location.coordinate.longitude), Double(location.coordinate.latitude)]]
         }
